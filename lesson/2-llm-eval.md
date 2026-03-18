@@ -9,7 +9,7 @@ Qwen3.5 (2026년 2월):
   - 201개 언어
 ```
 
-## 1. General Benchmark (범용 밴치마크) ##
+## 1. General Benchmark (범용 벤치마크) ##
 * https://github.com/EleutherAI/lm-evaluation-harness
 ```
 pip install lm-eval
