@@ -28,7 +28,7 @@ import sys
 | Human Preference | truthfulqa_mc2 | 거짓/오해 유발 답변 생성 여부 (환각 측정) | openbookqa | 기본 과학 상식 + 추론 결합 |
 | Safety | toxigen | 유해/혐오 발언 생성 여부 측정 | bbq | 사회적 편향 (성별, 인종, 나이 등) 측정 |
 
-![][()
+![](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/images/lm-eval.png)
 
 
 ## PPL ##
