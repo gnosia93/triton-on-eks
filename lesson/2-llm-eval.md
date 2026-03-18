@@ -37,8 +37,7 @@ import sys
 ![](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/images/lm-eval.png)
 
 
-## 2. PPL ##
-파인튜닝 이전에 "DevOps/머신러닝" 도메인에 대한 모델의 이해도를 측정한다. 
+## 2. Domain Benchmark (도메인 벤치마크) ##
 PPL(Perplexity)은 모델이 주어진 텍스트를 얼마나 "당연하게" 예측하는지를 측정하는 지표로, 수학적으로는 모델이 다음 토큰을 예측할 때의 평균 불확실성이다.
 ```
 PPL = exp(-1/N × Σ log P(token_i | token_1, ..., token_i-1))
@@ -66,12 +65,11 @@ PPL 값이 낮을수록 좋다.
 ```
 한마디로 PPL은 "모델이 이 도메인 텍스트를 얼마나 자연스럽게 느끼는가"의 수치화이고, 파인튜닝 효과를 정량적으로 검증하는 가장 기본적인 방법이다.
 
-### PPL 측정 ###
+### 2-1. PPL 측정 ###
 ![](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/images/qwen-ppl.png)
 * https://github.com/gnosia93/agentic-ai-eks/blob/main/code/qwen_ppl.py 
 
-
-### 도메인 밴치마크 ###
+### 2-2. 도메인 밴치마크 툴 사용 ###
 * 코딩: HumanEval, MBPP, DS-1000, SWE-bench
 * 의료: MedQA, PubMedQA, MedMCQA, BioASQ
 * 법률: LegalBench, LEXTREME, CaseHOLD
@@ -120,7 +118,6 @@ print(result)
 프로덕션에서는 사용자 요청과 LLM 응답을 로깅하고, 로그중 일부를 샘플링하여 비동기로 백그라운드에서 LLM Judge를 돌리고, 결과를 Prometheus 메트릭으로 수집하는 방식으로 운영.
 * 도구: MT-Bench, AlpacaEval, G-Eval, 직접 구현
 * 방식: Single Rating, Pairwise Comparison, Reference-based
-
 
 ## 4. 추론 성능 (Inference Performance) ##
 - Throughput: 초당 처리 토큰 수 (tokens/sec)
