@@ -119,13 +119,18 @@ resource "aws_iam_instance_profile" "eks_creator_profile" {
   role = aws_iam_role.eks_creator_role.name
 }
 
-data "aws_ami" "al2023_x86_64" {
+data "aws_ami" "gpu_ubuntu" {
   most_recent = true
   owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["al2023-ami-2023.*-kernel-6.1-x86_64"]
+    values = ["Deep Learning OSS Nvidia Driver AMI GPU PyTorch*Ubuntu 24.04*"]
+  }
+
+  filter {
+    name   = "state"
+    values = ["available"]
   }
 }
 
@@ -165,9 +170,9 @@ resource "aws_security_group" "instance_sg" {
   }
 }
 
-resource "aws_instance" "x86_box" {
-  ami                         = data.aws_ami.al2023_x86_64.id
-  instance_type               = var.x86_type
+resource "aws_instance" "gpu_box" {
+  ami                         = data.aws_ami.gpu_ubuntu.id
+  instance_type               = var.gpu_type
   subnet_id                   = aws_subnet.public[0].id
   vpc_security_group_ids      = [aws_security_group.instance_sg.id]
   associate_public_ip_address = true
@@ -182,19 +187,12 @@ resource "aws_instance" "x86_box" {
     volume_type = "gp3" # 최신 gp3 볼륨 타입 사용
   }
 
-  user_data = <<_DATA
-#!/bin/bash
-sudo -u ec2-user -i <<'EC2_USER_SCRIPT'
-curl -fsSL https://code-server.dev/install.sh | sh && sudo systemctl enable --now code-server@ec2-user
-sleep 5
-sed -i 's/127.0.0.1/0.0.0.0/g; s/auth: password/auth: none/g' /home/ec2-user/.config/code-server/config.yaml
-EC2_USER_SCRIPT
-
-sudo systemctl restart code-server@ec2-user
-_DATA
+  user_data = base64encode(templatefile("${path.module}/userdata.sh", {
+    vscode_password = var.vscode_password
+  }))
 
   tags = {
-    Name = "inf-code-server"
+    Name = "gpu-code-server"
   }
 }
 
