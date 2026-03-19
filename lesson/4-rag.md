@@ -185,9 +185,13 @@ for name, reranker in rerankers.items():
 
 ### 4. 벡터DB 선정기준 ###
 * 하이브리드 검색 지원 여부
+  
+![](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/images/vectordb-compare.png) 
+
 * 확장성
   * 데이터 규모: 수만 건이면 뭘 써도 되지만, 수천만~억 건이면 Milvus, Pinecone처럼 분산 아키텍처가 필요
   * 동시 요청: 트래픽이 많으면 수평 확장(샤딩, 레플리카) 지원 여부 확인
+
 * 메타데이터 필터링 - 검색 시 벡터 유사도 + 메타데이터 조건을 함께 걸 수 있는지.
 
 ### 5. 아키텍처 설계 ###
