@@ -183,7 +183,6 @@ for name, reranker in rerankers.items():
 > 2단계: 리랭커 → 후보 10~20개를 정밀하게 재정렬 (Cross-Encoder, 정확)
 > ```
 
-
 ### 4. 아키텍처 설계 ###
 아키텍처 설계는 이 파이프라인을 프로덕션에서 어떻게 운영할 것인가의 전체 그림이다.
 - 인프라: FastAPI 서버, 벡터DB 클러스터, LLM 서빙(vLLM) 배치
