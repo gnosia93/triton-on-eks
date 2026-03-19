@@ -122,7 +122,7 @@ for name, model in models.items():
 * Hit Rate@5: 상위 5개 안에 정답이 포함된 비율
 * MRR@5: 정답이 몇 번째에 있는지 (1위면 1.0, 2위면 0.5, 3위면 0.33)
 
-> [!IMPORTANT]
+> [!TIP]
 > 도메인 문서에 대해 질문과 정답 문서 쌍을 구성하고, 임베딩 모델별로 코사인 유사도(Cosine Similarity)를 계산하여 Top-N 검색 결과에 대한 Hit Rate와 MRR(Mean Reciprocal Rank)을 비교함으로써 최적의 임베딩 모델을 선정한다.
 
 
@@ -174,7 +174,7 @@ for name, reranker in rerankers.items():
     print(f"{name}: Hit Rate@5={hit/len(eval_data):.2f}, MRR@5={mrr/len(eval_data):.2f}")
 ```
 
-> [!IMPORTANT]
+> [!TIP]
 > 리랭커는 벡터 검색이 가져온 후보 문서들을 질문과 함께 다시 읽고, 관련성 순서를 재정렬하는 모델이다.
 벡터 검색(Bi-Encoder)은 질문과 문서를 각각 따로 임베딩해서 유사도를 비교하기 때문에 빠르지만, 질문과 문서 사이의 세밀한 의미 관계를 놓칠 수 있다.
 리랭커(Cross-Encoder)는 인코더 트랜스포머(BERT 계열)로, 질문과 후보 문서를 하나의 시퀀스로 결합한 뒤 Self-Attention을 통해 질문의 모든 토큰과 후보 문서의 모든 토큰 간 상호 관계를 계산하여 관련성 점수를 산출한다.
