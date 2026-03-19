@@ -60,7 +60,7 @@ for score, doc in ranked[:3]:
     print()
 ```
 
-### 2. ###
+### 2. 임베딩 모델 선정 ###
 
 
 
