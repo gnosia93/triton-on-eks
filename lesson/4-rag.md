@@ -122,6 +122,11 @@ for name, model in models.items():
 * Hit Rate@5: 상위 5개 안에 정답이 포함된 비율
 * MRR@5: 정답이 몇 번째에 있는지 (1위면 1.0, 2위면 0.5, 3위면 0.33)
 
+```
+도메인 문서에 대해 질문과 정답 문서 쌍을 구성하고, 임베딩 모델별로 코사인 유사도(Cosine Similarity)를 계산하여 Top-N 검색 결과에 대한 Hit Rate와 MRR(Mean Reciprocal Rank)을 비교함으로써 최적의 임베딩 모델을 선정한다.
+```
+
+
 ### 3. 리랭커 모델 선정 ###
 
 
