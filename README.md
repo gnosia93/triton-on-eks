@@ -13,6 +13,7 @@
    - Tool Calling (함수 호출)
    - Multi-Agent 패턴 (Planner → Executor → Reviewer)
    - 메모리 관리 (대화 히스토리)
+   - LangFuse
 
 * [6. 가드레일 구성하기]
    - Input/Output 필터링
