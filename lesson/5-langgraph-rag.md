@@ -90,5 +90,5 @@ for doc in result["reranked_docs"]:
 > FAISS는 Meta(Facebook)에서 만든 오픈소스 벡터 유사도 검색 라이브러리로, 대량의 고차원 벡터에서 유사한 벡터를 빠르게 찾아주는 것이 핵심 기능입니다. C++로 작성되어 속도가 빠르고, Python 바인딩을 제공하며, CPU와 GPU 모두 지원한다.
 > FAISS의 검색 엔진에는 ANN이라는 기법이 사용되는데, ANN(Approximate Nearest Neighbor)이란 모든 벡터를 하나씩 비교하는 대신 약간의 정확도(15%)를 포기하고 검색 범위를 대폭 줄여서 수백수천 배 빠르게 유사 벡터를 찾는 근사 검색 기법이다.
 >
-> ANN을 구현하는 대표적인 알고리즘이 HNSW(Hierarchical Navigable Small World)인데, 이는 벡터들을 여러 계층의 그래프로 연결해놓고 상위 계층(넓은 범위)에서 하위 계층(좁은 범위)으로 내려가며 탐색하는 방식입니다. > 별도의 사전 학습 없이 바로 사용할 수 있고, 정확도와 속도 모두 우수해서 Pinecone, Qdrant 등 대부분의 벡터 DB가 내부적으로 HNSW를 채택하고 있다.
+> ANN을 구현하는 대표적인 알고리즘이 HNSW(Hierarchical Navigable Small World)인데, 이는 벡터들을 여러 계층의 그래프로 연결해놓고 상위 계층(넓은 범위)에서 하위 계층(좁은 범위)으로 내려가며 탐색하는 방식입니다. 별도의 사전 학습 없이 바로 사용할 수 있고, 정확도와 속도 모두 우수해서 Pinecone, Qdrant 등 대부분의 벡터 DB가 내부적으로 HNSW를 채택하고 있다.
 
