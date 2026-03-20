@@ -179,12 +179,12 @@ print(result["messages"][-1].content)
 
 ## MCP ##
 
-* 패키지 설치
+vscode 쉘에서 아래 패키지를 설치한다. 
 ```shell
 pip install langchain-mcp-adapters langgraph langchain-openai
 ```
 
-* MCP 서버 준비
+mcp_server.py 파일을 생성하고 실행한다
 ```python
 # mcp_server.py
 from mcp.server.fastmcp import FastMCP
