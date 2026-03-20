@@ -8,7 +8,7 @@
 
 [4. RAG 파이프라인 설계](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/4-rag.md)
 
-5.Agentic AI
+5. Agentic AI
    - [LangGraph로 RAG 구현](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/5-langgraph-rag.md)
    - Tool Calling (함수 호출)
    - Multi-Agent 패턴 (Planner → Executor → Reviewer)
