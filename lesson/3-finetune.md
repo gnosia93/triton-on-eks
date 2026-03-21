@@ -74,7 +74,7 @@ vllm serve ./merged-model --port 8000
 ```
 
 * 자주쓰는 옵션
-```pythnon
+```bash
 
 vllm serve ./my-model \
   --port 8000 \
