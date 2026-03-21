@@ -21,15 +21,13 @@
 
 * [7. RAG 평가 파이프라인 구성하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/7.eval-framework.md)
 
-
-
-* [10. EKS 배포하기]
+* [8. EKS 배포하기]
     - Helm Chart 구성
     - GPU 노드에 vLLM 배포
     - HPA (Horizontal Pod Autoscaler) 설정
     - Ingress + 로드밸런싱
 
-* [11. Post Training]
+* [9. Post Training]
    - DPO로 선호도 정렬
    - 평가 → 재학습 루프
 
