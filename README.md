@@ -31,7 +31,7 @@
 ### _Appendix_ ###
 
 * [TensorRT-LLM 연산최적화](https://github.com/gnosia93/infer-on-eks/blob/main/lesson/a1-tensorrt-llm.md)
-* [Prometheus/Loki Stack]()   
+* [Prometheus/Loki Stack](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a2-prometheus-loki.md)   
 
 
 ### todo ###
