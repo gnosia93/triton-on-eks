@@ -6,7 +6,7 @@ variable "aws_region" {
 
 variable "cluster_name" {
   type        = string
-  default     = "agentic-ai-eks"
+  default     = "eks-agentic-ai"
 }
 
 variable "vpc_cidr_block" {
@@ -31,7 +31,7 @@ variable "key_name" {
 variable "vscode_password" {
   description = "VS Code Server password"
   type        = string
-  sensitive   = true
+  sensitive   = false
   # default 없음 → apply 시 입력 프롬프트 뜸
 }
 
