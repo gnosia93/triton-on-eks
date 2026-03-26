@@ -93,7 +93,7 @@ Loki는 Grafana Labs가 만든 로그 수집/검색 시스템으로, "Prometheus
 {node=~"gpu-node-.*"} |= "error" | logfmt
 ```
 
-#### loki 설정 예시 ####
+### loki 설정 예시 ###
 ```
 # loki-config.yaml
 auth_enabled: false
