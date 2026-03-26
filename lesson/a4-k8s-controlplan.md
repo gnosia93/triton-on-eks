@@ -38,14 +38,14 @@ etcdctl endpoint health
 ```
 
 ### 대규모에서 주의할 메트릭 ###
-```
-# API Server 응답 지연 (느려지면 클러스터 전체 느려짐)
+* API Server 응답 지연 (느려지면 클러스터 전체 느려짐)
+
 histogram_quantile(0.99, rate(apiserver_request_duration_seconds_bucket[5m]))
 
-# etcd 쓰기 지연 (10ms 넘으면 위험)
+* etcd 쓰기 지연 (10ms 넘으면 위험)
+
 histogram_quantile(0.99, rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m]))
 
-# 스케줄링 지연
+* 스케줄링 지연
+
 scheduler_scheduling_duration_seconds
-EKS에서는 Control Plane을 AWS가 관리하니까 로그만 켜두면 되고, 온프렘에서는 etcd 디스크 성능과 API Server 응답 시간을 직접 모니터링해야 합니다.
-```
