@@ -19,7 +19,7 @@
 
 * [8. EKS 배포하기]
     - Helm Chart 구성
-    - GPU 노드에 vLLM 배포
+    - GPU 노드에 vLLM / TensorRT-LLM 배포
     - HPA (Horizontal Pod Autoscaler) 설정
     - Ingress + 로드밸런싱
 
