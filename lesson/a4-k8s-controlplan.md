@@ -34,7 +34,7 @@ etcdctl endpoint health
 ```
 
 ### 대규모에서 주의할 메트릭 ###
-* API Server 응답 지연 (느려지면 클러스터 전체 느려짐)
+* API Server 응답 지연 (느려지면 클러스터 전체 느려짐 - 응답 1초 초과)
 
   histogram_quantile(0.99, rate(apiserver_request_duration_seconds_bucket[5m]))
 
@@ -42,6 +42,6 @@ etcdctl endpoint health
 
   histogram_quantile(0.99, rate(etcd_disk_wal_fsync_duration_seconds_bucket[5m]))
 
-* 스케줄링 지연
+* 스케줄링 지연 (스케줄링 대기 Pod 100개 초과)
 
   scheduler_scheduling_duration_seconds
