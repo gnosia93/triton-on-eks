@@ -4,7 +4,7 @@
 모델을 컴파일 하여 S3 에 저장한다.
 ```bash
 # S3 버킷 생성
-export ENGINE_BUCKET=tenssorrt-llm-`date +YMDHM`
+export ENGINE_BUCKET=tensorrt-llm-$(date +%Y%m%d%H%M)
 aws s3 mb s3://${ENGINE_BUCKET} --region ap-northeast-2
 
 # ServiceAccount에 S3 접근 권한 부여
