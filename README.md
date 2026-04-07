@@ -2,7 +2,7 @@
 
 * [L1. EKS 설치하기](https://github.com/gnosia93/eks-agentic-ai/tree/main/iac/tf)
 
-* [L2. 로컬 PC 노트북 설정](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/1.start.md)
+* [L2. PC 노트북 설정](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/2-pc-notebook.md)
 
 * [L3. LLM 평가하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/3-llm-eval.md)
 
