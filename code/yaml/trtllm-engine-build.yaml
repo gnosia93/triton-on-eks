@@ -1,0 +1,66 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: trtllm-engine-build
+  namespace: default
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        app: trtllm-engine-build
+    spec:
+      restartPolicy: Never
+      nodeSelector:
+        node.kubernetes.io/instance-type: g6e.12xlarge
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+          effect: NoSchedule
+      serviceAccountName: s3-access-sa    # IRSA로 S3 권한 부여
+      containers:
+        - name: builder
+          image: nvcr.io/nvidia/tritonserver:24.12-trtllm-python-py3
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              set -e
+              pip install -U huggingface_hub awscli
+
+              echo "=== Downloading model ==="
+              huggingface-cli download Qwen/Qwen2.5-27B-Instruct --local-dir /workspace/qwen-hf
+
+              echo "=== Building TRT-LLM engine ==="
+              python -m tensorrt_llm.commands.build \
+                --model_dir /workspace/qwen-hf \
+                --output_dir /workspace/engines/qwen \
+                --dtype bfloat16 \
+                --tp_size 4 \
+                --max_input_len 4096 \
+                --max_seq_len 8192 \
+                --max_batch_size 64 \
+                --gemm_plugin bfloat16 \
+                --gpt_attention_plugin bfloat16
+
+              echo "=== Uploading to S3 ==="
+              aws s3 cp /workspace/engines/qwen/ s3://my-bucket/trtllm-engines/qwen/ --recursive
+              aws s3 cp /workspace/qwen-hf/ s3://my-bucket/trtllm-models/qwen-hf/ --recursive
+
+              echo "=== Done ==="
+          resources:
+            limits:
+              nvidia.com/gpu: "4"
+            requests:
+              nvidia.com/gpu: "4"
+          volumeMounts:
+            - name: shm
+              mountPath: /dev/shm
+            - name: workspace
+              mountPath: /workspace
+      volumes:
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 16Gi
+        - name: workspace
+          emptyDir: {}
