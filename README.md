@@ -22,7 +22,7 @@
 * [8. EKS 배포하기]
    - [vLLM 인퍼런스](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/8-vllm-inference.md)  
    - [TensorRT-LLM 인퍼런스](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/8-tensorrt-inference.md)
-   - HPA (Horizontal Pod Autoscaler) 설정
+   - [오토 스케일링]
    - Ingress + 로드밸런싱
    - Helm Chart 구성
   
