@@ -14,21 +14,20 @@ terraform init
 terraform apply -auto-approve
 ```
 
-### Karpenter 설치 ###
+### 클러스터 등록 ###
 
 gpu-vscode 웹 콘솔로 로그인하여 아래 명령어를 실행한다.
 ```
-export CLUSTER_NAME=my-cluster
+export CLUSTER_NAME=eks-agentic-ai
 aws eks update-kubeconfig --name ${CLUSTER_NAME}
 
 # Karpenter 설치
-helm install karpenter oci://public.ecr.aws/karpenter/karpenter \
-  --namespace karpenter --create-namespace \
-  --set settings.clusterName=${var.cluster_name} \
-  --set settings.clusterEndpoint=$(aws eks describe-cluster --name ${var.cluster_name} --query "cluster.endpoint" --output text) \
-  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${karpenter_role_arn}
+#helm install karpenter oci://public.ecr.aws/karpenter/karpenter \
+#  --namespace karpenter --create-namespace \
+#  --set settings.clusterName=${var.cluster_name} \
+#  --set settings.clusterEndpoint=$(aws eks describe-cluster --name ${var.cluster_name} --query "cluster.endpoint" --output text) \
+#  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${karpenter_role_arn}
 ```
-variables.tf에 cluster_name 변수가 이미 있으니 그대로 쓰면 된다.
 
 
 ### EKS 삭제 ###
