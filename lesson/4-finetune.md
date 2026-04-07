@@ -4,7 +4,7 @@
 
 ### 파인튜닝 해보기 ###
 
-주피터 노트북의 셀에 아래 qwen_finetune.py 를 복사하여 실행한다. 
+주피터 노트북의 셀에 아래 qwen_finetune_inst.py 를 복사하여 실행한다. 
 
 * https://github.com/gnosia93/agentic-ai-eks/blob/main/code/qwen_finetune_inst.py
 
