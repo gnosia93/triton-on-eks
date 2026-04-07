@@ -1,7 +1,7 @@
 ## vLLM 배포하기 ##
 
 Qwen2.5-27B 모델을 g6e.12xlarge (L40S 48GB * 4EA, TP=4) 설정으로 2개의 파드로 구성한다.
-g6e.12xlarge 인스턴스는 2대가 필요하다.
+[g6e.12xlarge](https://aws.amazon.com/ko/ec2/instance-types/g6e/) 인스턴스는 2대가 필요하다.
 
 * https://github.com/gnosia93/eks-agentic-ai/blob/main/code/yaml/vllm-deployment.yaml
 ```bash
