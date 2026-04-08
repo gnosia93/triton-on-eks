@@ -15,7 +15,8 @@
    - [@tool 콜링](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/6-tool-calling.md)
    - [LangFuse 사용하기](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/6-langfuse.md)
    - 멀티 에이전트
-   
+   - [프로적션 최적화]()
+     
 * [L7. 가드레일 구성하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/7.guard-rail.md)
 
 * [L8. RAG 평가 파이프라인 구성하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/8.eval-framework.md)
