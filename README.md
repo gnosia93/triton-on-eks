@@ -21,12 +21,14 @@
 
 * [L8. RAG 평가 파이프라인 구성하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/8.eval-framework.md)
 
-* L9. EKS 배포하기
+* L9. CI/CD 파이프라인: 프롬프트 버전 관리, 에이전트 로직 테스트 자동화, 배포 파이프라인.
+
+* L10. EKS 배포하기
    - [vLLM 인퍼런스](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/9-vllm-inference.md)  
    - [TensorRT-LLM 인퍼런스](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/9-tensorrt-inference.md)
    - [KEDA 기반 오토 스케일링](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/9-keda-autoscaling.md)
   
-* [L10. Post Training](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/10.post-training.md)
+* [L11. Post Training](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/10.post-training.md)
 
 
 ### _Appendix_ ###
@@ -36,10 +38,9 @@
 * [LOKI에 K8S 이벤트 저장하기](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a3-k8s-event.md)
 * [K8S 컨트롤 플레인](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a4-k8s-controlplan.md)
 * [Harness Engineering](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a5.harness-eng.md)
-* 프롬프트 엔지니어링 심화: 시스템 프롬프트 설계, few-shot, chain-of-thought 같은 기법을 체계적으로 다루는 파트가 없어요.
+* 프롬프트 엔지니어링 심화: 시스템 프롬프트 설계, few-shot, chain-of-thought 같은 기법
 * 스트리밍 응답: 실시간 토큰 스트리밍, SSE/WebSocket 기반 응답 처리.
 * 사용자 피드백 루프: 응답에 대한 thumbs up/down 수집하고 개선에 반영하는 구조.
-* CI/CD 파이프라인: 프롬프트 버전 관리, 에이전트 로직 테스트 자동화, 배포 파이프라인.
      
 ## 레퍼런스 ##
 * https://github.com/NVIDIA/Model-Optimizer/tree/main 
