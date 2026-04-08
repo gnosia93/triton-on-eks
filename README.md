@@ -14,7 +14,7 @@
    - [LangGraph로 RAG 구현](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/6-langgraph-rag.md)
    - [@tool 콜링](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/6-tool-calling.md)
    - [LangFuse 사용하기](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/6-langfuse.md)
-   - 멀티 에이전트 오케스트레이션
+   - [멀티 에이전트 오케스트레이션](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/6-multi-agent.md)
    - [프로덕션 최적화 및 고려사항](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/6-production-optim.md)
      
 * [L7. 가드레일 구성하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/7.guard-rail.md)
