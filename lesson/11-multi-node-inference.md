@@ -12,17 +12,14 @@
 ### TP + PP 하이브리드 구성 시 고려사항 ###
 * TP degree 선택: 노드 내 GPU 수(보통 8)를 넘지 않도록 설정. NVLink 대역폭(예: A100 NVSwitch 600GB/s)을 넘어 노드 간 TP를 걸면 all-reduce 지연이 급격히 증가.
    * all-reduce = reduce-scatter + all-gather 
-* PP stage 분할: 레이어를 균등 분할하는 것이 기본이지만, 임베딩 레이어나 LM head가 있는 첫/마지막 스테이지는 연산량이 다르므로 불균형이 발생한다. vLLM이나 TensorRT-LLM에서는 이를 자동 밸런싱하는 옵션이 있다.
-  
+* PP stage 분할: 레이어를 균등 분할하는 것이 기본이지만, 임베딩 레이어나 LM head가 있는 첫/마지막 스테이지는 연산량이 다르므로 불균형이 발생한다. vLLM이나 TensorRT-LLM에서는 이를 자동 밸런싱하는 옵션이 있다.  
   #### [vLLM PP Layer Partition](https://discuss.vllm.ai/t/is-it-possible-to-configure-the-order-of-the-pipeline-in-multi-node-deployments/1744) ####
   ```
   # 32개 레이어를 3개 PP 스테이지에 불균등 분배
   VLLM_PP_LAYER_PARTITION=20,10,2 vllm serve meta-llama/Llama-70B \
     --pipeline-parallel-size 3 \
     --tensor-parallel-size 8
-  ```
-  * 마이크로배치 수: PP 버블을 줄이려면 마이크로배치 수를 PP 스테이지 수의 4배 이상으로 잡는 것이 경험적으로 효과적이다. 다만 인퍼런스에서는 배치 크기가 제한적이라 트레이닝만큼 효과를 보기 어려울 수 있다.
-  
+  ```  
   #### [tensorrt auto_parallel](https://nvidia.github.io/TensorRT-LLM/examples/llm_auto_parallel.html) ####
   ```
   from tensorrt_llm._tensorrt_engine import LLM
@@ -33,6 +30,8 @@
       auto_parallel_world_size=16   # 총 GPU 수
   )
   ```
+* 마이크로배치 수: PP 버블을 줄이려면 마이크로배치 수를 PP 스테이지 수의 4배 이상으로 잡는 것이 경험적으로 효과적이다. 다만 인퍼런스에서는 배치 크기가 제한적이라 트레이닝만큼 효과를 보기 어려울 수 있다.
+
 
 ### 노드 간 통신 최적화 ###
 * NCCL 튜닝: NCCL_ALGO, NCCL_PROTO 환경변수로 통신 알고리즘/프로토콜 선택 가능. InfiniBand 환경에서는 NCCL_IB_HCA로 HCA 디바이스를 명시적으로 지정하면 성능이 개선된다.
