@@ -120,3 +120,37 @@ spec:
             limits:
               nvidia.com/gpu: 8
 ```
+
+## Disaggregated Prefill/Decode ##
+```
+Prefill (프롬프트 처리)
+├── 입력 토큰 수천~수만 개를 한 번에 처리
+├── GPU 연산량이 매우 큼 (compute-bound)
+├── 배치 처리에 유리 (행렬 곱이 크니까 GPU 활용률 높음)
+└── 지연 시간: 수백ms ~ 수초
+
+Decode (토큰 생성)
+├── 한 번에 토큰 1개씩 생성
+├── 매 스텝마다 KV cache를 읽어야 함 (memory-bound)
+├── GPU 연산 자체는 적은데 메모리 대역폭을 많이 씀
+└── 지연 시간: 토큰당 수십ms (실시간 스트리밍)
+```
+```
+시간축 →
+GPU: [Prefill 요청A ██████████][Decode B ░][Decode C ░][Prefill 요청D ██████████][Decode B ░]...
+
+Decode B, C 입장: Prefill이 GPU를 점유하는 동안 밀려서 TTBT(Time Between Tokens)가 튐
+Prefill D 입장: Decode가 끼어들어서 처리량이 떨어짐
+```
+### Prefill 그룹 ###
+* compute-bound이니까 GPU 연산 처리량을 극대화
+* 큰 배치를 모아서 한 번에 처리 (throughput 최적화)
+* TP=8 등 높은 병렬도로 빠르게 처리
+* Decode의 간섭 없이 GPU를 100% 연산에 활용
+
+### Decode 그룹 ###
+* memory-bound이니까 메모리 대역폭 활용을 극대화
+* 토큰 생성 지연(TPOT)을 일정하게 유지하는 게 중요
+* Prefill의 큰 연산이 끼어들지 않으니 지연이 안정적
+* 상대적으로 낮은 TP로도 충분할 수 있음 (연산량 자체는 적으니까)
+
