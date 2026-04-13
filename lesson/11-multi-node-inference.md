@@ -30,3 +30,29 @@
 * Speculative Decoding: 작은 draft 모델로 여러 토큰을 먼저 생성하고 큰 모델로 검증. 멀티노드 환경에서 draft 모델을 별도 노드에 배치하면 지연시간을 줄일 수 있다.
 * Expert Parallelism: MoE 모델의 경우 expert를 노드별로 분산 배치하는 전략이 TP/PP와 별도로 필요하다.
 * Disaggregated Prefill/Decode: prefill(프롬프트 처리)과 decode(토큰 생성)를 별도 노드 그룹에서 처리하는 아키텍처. 처리량과 지연시간을 독립적으로 스케일링할 수 있다.
+
+
+### 인퍼런스 특화 PP 버블 문제 ###
+트레이닝과 달리 인퍼런스에서는 PP 버블 문제가 다른 양상을 보이게 된다.
+
+* Prefill 단계: 입력 시퀀스 전체를 한 번에 처리하므로 마이크로배칭이 가능하고, 트레이닝과 유사하게 버블을 줄일 수 있다.
+* Decode 단계: 토큰 하나씩 순차 생성하므로 마이크로배칭 효과가 제한적이다. 이 단계에서 PP는 본질적으로 스테이지 수만큼의 지연시간 패널티가 발생한다.
+Prefill 노드 그룹은 PP로 처리량을 높이고, Decode 노드 그룹은 TP 위주로 지연시간을 최소화하는 식으로 분리할 수 있다.
+
+### KV Cache 동기화의 실제 병목 ###
+멀티노드 continuous batching에서 KV cache 관련 실질적 이슈는:
+
+* PP 구성에서는 각 스테이지가 자기 레이어의 KV cache만 관리하므로 노드 간 KV cache 동기화는 불필요하다. 다만 스케줄링 메타데이터(어떤 요청이 활성 상태인지, 어떤 슬롯이 비었는지)는 동기화해야 한다.
+* Disaggregated 구성에서는 prefill 노드에서 생성된 KV cache를 decode 노드로 전송해야 하는데, 이 전송량이 상당하다. 예를 들어 Llama 70B에서 시퀀스 길이 2048이면 KV cache가 수 GB에 달할 수 있다. RDMA 기반 전송이 사실상 필수이다.
+
+### Expert Parallelism 심화 ###
+MoE 모델에서 EP를 적용할 때의 핵심 트레이드오프:
+
+* All-to-All 통신: 각 토큰이 라우팅된 expert가 있는 노드로 이동해야 하므로 all-to-all 통신이 발생한다. expert 수가 많을수록(DeepSeek-V3는 256개) 통신 패턴이 복잡해진다.
+* Expert 로드 밸런싱: 특정 expert에 토큰이 몰리면 해당 노드가 병목이 된다. 트레이닝 시 auxiliary loss로 밸런싱을 유도하지만, 인퍼런스에서는 입력 분포에 따라 불균형이 발생할 수 있다.
+* EP + TP + PP 3중 병렬화: 초대형 MoE 모델에서는 세 가지를 모두 조합해야 한다. 예를 들어 노드 내 8 GPU 중 4개씩 2그룹으로 TP를 걸고, expert를 노드 간 EP로 분산하고, attention 레이어는 PP로 나누는 식이다.
+
+### 실무 배포 시 자주 놓치는 부분들 ###
+* Health check와 failover: 멀티노드 서빙에서 한 노드가 죽으면 전체 파이프라인이 멈추게 된다. Kubernetes 환경에서 pod 단위 재시작보다는 전체 replica 단위 관리가 필요하다.
+* 웜업: 첫 요청 시 CUDA 커널 컴파일, NCCL 초기화 등으로 지연이 크게 발생한다. 배포 후 더미 요청으로 웜업하는 것이 필수이다.
+* 네트워크 토폴로지 인식: 클라우드 환경에서 노드 간 대역폭이 균일하지 않을 수 있기 때문에 placement group(AWS)이나 compact placement policy(GCP)로 노드를 물리적으로 가까이 배치해야 한다.
