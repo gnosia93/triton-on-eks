@@ -28,7 +28,7 @@
    - [TensorRT-LLM 인퍼런스](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/10-tensorrt-inference.md)
    - [KEDA 기반 오토 스케일링](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/10-keda-autoscaling.md)
 
-* L11. 멀티 노드 추론 최적화
+* [L11. 멀티 노드 추론 최적화](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/11-multi-node-inference.md)
 
 * [L12. Post Training](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/12-post-training.md)
 
