@@ -35,12 +35,6 @@
   * Decode 단계: 토큰 하나씩 순차 생성하므로 마이크로배칭 효과가 제한적이다. 이 단계에서 PP는 본질적으로 스테이지 수만큼의 지연시간 패널티가 발생한다.
 Prefill 노드 그룹은 PP로 처리량을 높이고, Decode 노드 그룹은 TP 위주로 지연시간을 최소화하는 식으로 분리할 수 있다.
 
-### KV Cache 동기화의 실제 병목 ###
-멀티노드 continuous batching에서 KV cache 관련 실질적 이슈는:
-
-* PP 구성에서는 각 스테이지가 자기 레이어의 KV cache만 관리하므로 노드 간 KV cache 동기화는 불필요하다. 다만 스케줄링 메타데이터(어떤 요청이 활성 상태인지, 어떤 슬롯이 비었는지)는 동기화해야 한다.
-* Disaggregated 구성에서는 prefill 노드에서 생성된 KV cache를 decode 노드로 전송해야 하는데, 이 전송량이 상당하다. 예를 들어 Llama 70B에서 시퀀스 길이 2048이면 KV cache가 수 GB에 달할 수 있다. RDMA 기반 전송이 사실상 필수이다.
-
 ### Expert Parallelism 심화 ###
 MoE 모델에서 EP를 적용할 때의 핵심 트레이드오프:
 
