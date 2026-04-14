@@ -125,7 +125,29 @@ kubectl exec -it <vllm-pod-name> -- \
     --request-rate 10
 ```
 TTFT (Time to First Token), TPOT (Time per Output Token), Throughput (tokens/sec), Request Latency (p50/p99) 을 baseline 과 비교한다.
-
 TPOT와 Throughput에서 가장 큰 차이가 나타난다. 일반적으로 1.5~2.5배 속도 향상을 기대할 수 있으며, 코드 생성처럼 정형화된 출력에서 효과가 더 크다.
-
 num-speculative-tokens는 너무 높이면 draft 모델의 추측이 틀릴 확률이 올라가서 오히려 느려질수 있다. 5가 무난한 시작점이고, 벤치마크 결과 보면서 3~7 사이에서 조절한다.
+
+
+
+## KV Cache / PagedAttention 튜닝 ##
+#### KV Cache 튜닝 ####
+```
+vllm serve model \
+  --gpu-memory-utilization 0.9    # GPU 메모리 중 KV cache에 할당할 비율 (기본 0.9)
+  --max-model-len 4096            # 최대 시퀀스 길이 제한 → KV cache 크기 제한
+  --block-size 16                 # PagedAttention 페이지 크기 (기본 16)
+  --enable-prefix-caching         # 공통 프롬프트의 KV cache 재사용
+
+gpu-memory-utilization 높이면 → 동시 요청 더 많이 수용, 대신 OOM 위험
+max-model-len 줄이면 → KV cache 메모리 절약, 대신 긴 컨텍스트 불가
+prefix-caching 켜면 → 시스템 프롬프트 등 공통 부분 재계산 안 함
+```
+
+#### Continuous Batching 튜닝 ####
+```
+vllm serve model \
+  --max-num-seqs 256              # 동시에 배치에 넣을 최대 요청 수
+  --max-num-batched-tokens 4096   # 한 iteration에 처리할 최대 토큰 수
+  --enable-chunked-prefill        # 긴 prefill을 쪼개서 decode와 인터리빙
+```
