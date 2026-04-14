@@ -146,6 +146,11 @@ Prefill D 입장: Decode가 끼어들어서 처리량이 떨어짐
 * Prefill의 큰 연산이 끼어들지 않으니 지연이 안정적
 * 상대적으로 낮은 TP로도 충분할 수 있음 (연산량 자체는 적으니까)
 
+### 트레이드오프 ###
+Disaggregated 구성은 ITL을 크게 개선하지만(최대 14배), KV cache 전송 오버헤드로 인해 TTFT가 증가하고, 고정 클러스터에서는 역할 분리로 인한 자원 감소로 처리량이 떨어질 수 있다.
+[벤치마크](https://pythonsheets.com/notes/appendix/disaggregated-prefill-decode.html)에서는 단순히 독립 노드를 로드밸런싱한 구성이 처리량과 TTFT 모두에서 Disaggregated를 앞서는 경우도 있었다.
+따라서 ITL이 가장 중요한 SLA가 아니라면, 단순한 DP + 로드밸런싱이 더 나은 선택일 수 있다.
+
 ---
 * Disaggregated 섹션에 트레이드오프(TTFT 증가, 단순 로드밸런싱이 나은 경우) 추가 권장
 * 서빙 프레임워크 섹션에 핵심 차이(런타임 vs 컴파일러, 콜드스타트, 하드웨어 호환성) 보강 권장
