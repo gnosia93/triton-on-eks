@@ -9,7 +9,7 @@ SSRF(Server-Side Request Forgery, 서버 측 요청 위조)는 공격자가 웹 
 * 위험 프로토콜 차단: file:///, gopher://, ftp:// 등 제한.
 
 
-### 에이전트 아미텍처 ###
+## 에이전트 보안 아키텍처 ##
 
 ![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/security-toolcall-ssrf.png)
 
