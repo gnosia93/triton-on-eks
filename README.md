@@ -56,8 +56,7 @@
 * [인퍼런스용 GPU 선정하기](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a8-model-fit-gpu.md)
 
      
-## 레퍼런스 ##
-* https://github.com/NVIDIA/Model-Optimizer/tree/main 
+
 
 
 
