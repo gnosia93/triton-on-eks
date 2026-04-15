@@ -180,3 +180,8 @@ curl -X POST http://localhost:8001/v1/completions \
 jobs
 kill %1
 ```
+
+## 레이어드 가드레일 아키텍처(Layered Guardrail Architecture) ##
+```
+사용자 입력 → [Prompt Guard] → [Llama Guard 3] → [메인 LLM] → [Llama Guard 3] → 응답
+```
