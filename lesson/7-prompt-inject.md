@@ -1,3 +1,4 @@
+## Prompt Injection 탐지 모델 적용 (Llama Guard 3) ##
 
 ### LLM 기반 가드레일 아키텍처 ###
 ![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/llm-security-guardrail.png)
