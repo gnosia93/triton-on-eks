@@ -1,4 +1,4 @@
-# prompt-guard.py
+# app.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
