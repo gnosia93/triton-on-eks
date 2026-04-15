@@ -127,7 +127,10 @@ docker tag ${REPO_NAME}:${IMAGE_TAG} \
 # 푸시
 docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:${IMAGE_TAG}
 ```
-
+prompt-guard.yaml 의 <YOUR_ECR_REPO> 를 실제 ecr 레포지토리로 수정한다.
+```
+sed -i '' "s|<YOUR_ECR_REPO>/prompt-guard:latest|${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPO_NAME}:${IMAGE_TAG}|g" prompt-guard.yaml
+```
 
 
 
