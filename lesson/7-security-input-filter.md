@@ -168,3 +168,26 @@ print(f"복원: {deanonymized.text}")
 * 기본 제공 엔티티: PERSON, EMAIL_ADDRESS, PHONE_NUMBER, CREDIT_CARD, IP_ADDRESS 등
 * PatternRecognizer로 커스텀 패턴(한국 주민번호, 전화번호 등)을 쉽게 추가 가능
 * encrypt/decrypt 연산자를 쓰면 역익명화도 가능
+
+## 입력 위생 처리 로직 샘플 ##
+```
+from presidio_analyzer import AnalyzerEngine
+from presidio_anonymizer import AnonymizerEngine
+
+sanitizer = InputSanitizer()
+analyzer = AnalyzerEngine()
+anonymizer = AnonymizerEngine()
+
+def process_input(user_input: str) -> str:
+    # Step 1: 입력 위생 처리
+    result = sanitizer.sanitize(user_input)
+    if not result.is_valid:
+        raise ValueError(f"입력 거부: {result.rejection_reason}")
+
+    # Step 2: Presidio PII 마스킹
+    pii_results = analyzer.analyze(text=result.sanitized_text, language="en")
+    masked = anonymizer.anonymize(text=result.sanitized_text, analyzer_results=pii_results)
+
+    # Step 3: Llama Guard 3 → LLM 호출 (이후 단계)
+    return masked.text
+```
