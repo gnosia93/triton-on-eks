@@ -29,9 +29,9 @@ spec:
           args:
             - |
               echo "=== Downloading engine from S3 ==="
-              aws s3 cp s3://my-bucket/trtllm-engines/qwen/ /engines/qwen/ --recursive
+              aws s3 cp s3://${ENGINE_BUCKET}/trtllm-engines/qwen/ /engines/qwen/ --recursive
               echo "=== Downloading tokenizer from S3 ==="
-              aws s3 cp s3://my-bucket/trtllm-models/qwen-hf/ /models/qwen-hf/ --recursive
+              aws s3 cp s3://${ENGINE_BUCKET}/trtllm-models/qwen-hf/ /models/qwen-hf/ --recursive
               echo "=== Download complete ==="
           volumeMounts:
             - name: engine-store
