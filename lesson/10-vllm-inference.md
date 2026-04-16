@@ -186,13 +186,38 @@ Capturing CUDA graphs (decode, FULL): 100%|██████████| 35/35
 (APIServer pid=1) INFO:     Application startup complete.
 ```
 
-### vLLM 파라미터 ###
+### vLLM 컨테이너 스팩 ###
+```
+...
+containers:
+  - name: vllm
+    image: vllm/vllm-openai:latest
+    command: ["python3", "-m", "vllm.entrypoints.openai.api_server"]
+    args:
+      - --model=Qwen/Qwen2.5-72B-Instruct           # fp16 사용시 144GB Weight 메모리 필요
+      - --tensor-parallel-size=4                    # g6e.12xlarge 는 GPU 48GB 4장 -> 총 192GB
+      - --max-model-len=8192
+      - --gpu-memory-utilization=0.90
+      - --port=8000
+      - --served-model-name=qwen
+    ports:
+      - containerPort: 8000
+    resources:
+      limits:
+        nvidia.com/gpu: "4"
+      requests:
+        nvidia.com/gpu: "4"
+    volumeMounts:
+      - name: shm
+        mountPath: /dev/shm
+      - name: model-cache
+        mountPath: /root/.cache/huggingface
+```
 * --model                     사용모델
 * --tensor-parallel-size      GPU 갯수
 * --max-model-len             최대 시퀀스 길이
-* --gpu-memory-utilization    GPU 메모리 상용률(90% 권장)
+* --gpu-memory-utilization    GPU 메모리 상용률(90% 권장) - vLLM이 각 GPU 메모리의 90%까지 사용하겠다는 설정
    - CUDA 커널 실행 오버헤드, Activation 임시 버퍼, Tensor 연산 중간 결과물, NCCL 통신 버퍼 (TP 사용시)
-
 
 ### 테스트 ###
 ```
