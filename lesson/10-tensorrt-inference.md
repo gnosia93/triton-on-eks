@@ -54,6 +54,11 @@ Downloading 'model-00016-of-00037.safetensors' to '/workspace/qwen-hf/.cache/hug
 ...
 ```
 
+> [!TIP]
+> 설치된 파이썬 패키지 정보 조회하기  
+> kubectl exec -it trtllm-engine-build-vlhs7 -- bash
+> pip show transformers torch tensorrt_llm
+
 ### 모델 배포하기 ###
 [trtllm-qwen.yaml](https://github.com/gnosia93/eks-agentic-ai/blob/main/code/yaml/trtllm-qwen.yaml) 로 TensorRT-LLM 서버를 배포한다.
 ```
