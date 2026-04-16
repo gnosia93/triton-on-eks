@@ -55,7 +55,7 @@ Downloading 'model-00016-of-00037.safetensors' to '/workspace/qwen-hf/.cache/hug
 ```
 
 ### 모델 배포하기 ###
-[trtllm-qwen.yaml](https://github.com/gnosia93/eks-agentic-ai/blob/main/code/yaml/trtllm-engine-build.yaml) 로 TensorRT-LLM 서버를 배포한다.
+[trtllm-qwen.yaml](https://github.com/gnosia93/eks-agentic-ai/blob/main/code/yaml/trtllm-engine.yaml) 로 TensorRT-LLM 서버를 배포한다.
 ```
 curl -o trtllm-qwen.yaml \
   https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/yaml/trtllm-qwen.yaml
