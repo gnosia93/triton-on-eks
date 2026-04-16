@@ -28,6 +28,8 @@ terraform apply --auto-approve
 eai-vscode 웹 콘솔로 로그인하여 아래 명령어를 실행한다.
 ```
 export CLUSTER_NAME=eks-agentic-ai
+aws configure set region ap-northeast-2
+
 aws eks update-kubeconfig --name ${CLUSTER_NAME}
 
 # Karpenter 설치
