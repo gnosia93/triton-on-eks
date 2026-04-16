@@ -24,7 +24,7 @@ spec:
       containers:
         - name: vllm
           image: vllm/vllm-openai:latest
-          command: ["python", "-m", "vllm.entrypoints.openai.api_server"]
+          command: ["python3", "-m", "vllm.entrypoints.openai.api_server"]
           args:
             - --model=Qwen/Qwen2.5-72B-Instruct    # fp16 사용시 134GB Weight 메모리 필요
             - --tensor-parallel-size=4             # g6e.12xlarge GPU 4장
