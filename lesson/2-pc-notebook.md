@@ -1,12 +1,12 @@
 
-vscode 서버에는 Jupyter, pytorch 등의 환경이 모두 설치되어져 있다. 
+vscode 서버에는 이미 Jupyter, pytorch 등의 ML 개발 환경이 모두 설정되어져 있다. 
 
 ### 주피터 노트북 실행하기 ###
 vscode 터미널에서 아래 명령어를 실행한 후, 브라우저의 새창을 띄운후 8080 포트로 접속한다.
 ```
 jupyter lab --ip=0.0.0.0 --port=8080 --no-browser --NotebookApp.token='' --NotebookApp.password=''
 ```
-
+![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/jupyter-notebook.png)
 
 
 ### 참고 - PC 의 VS CODE 설정 ###
