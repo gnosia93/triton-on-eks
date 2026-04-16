@@ -21,6 +21,13 @@ variable "gpu_type" {
   default     = "g7e.4xlarge"
 }
 
+variable "system_node_instance_types" {
+  description = "EKS system node Group Instance Type "
+  type    = list(string)
+  default = ["c7g.xlarge"]
+}
+
+
 variable "key_name" {
   description = "AWS SSH Key Pair name for EC2 access"
   type        = string
