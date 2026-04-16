@@ -20,6 +20,8 @@ vllm-qwen-788d98bbfd-r2tjg   0/1     ContainerCreating   0               21m
 vllm-qwen-849cb97c7c-fcfnh   0/1     Running             0               7m54s
 ```
 ![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/qwen-72B-node-viewer.png)
+
+vllm 로그를 확인한다.
 ```bash
 kubectl logs -f vllm-qwen-849cb97c7c-fcfnh
 ```
