@@ -40,7 +40,7 @@ spec:
               mountPath: /models
       containers:
         - name: triton
-          image: nvcr.io/nvidia/tritonserver:24.12-trtllm-python-py3
+          image: nvcr.io/nvidia/tritonserver:26.02-trtllm-python-py3
           command: ["python3", "-m", "tensorrt_llm.commands.serve"]
           args:
             - --engine_dir=/engines/qwen
