@@ -46,6 +46,25 @@ genai-perf profile \
   --concurrency 10 \
   --tokenizer Qwen/Qwen2.5-72B-Instruct
 ```
+[결과]
+```
+[2026-04-17 09:57:37] INFO     Parsing total 20 requests.                                                                     llm_profile_data_parser.py:124
+Progress: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████| 20/20 [00:00<00:00, 443.30requests/s]
+                                        NVIDIA GenAI-Perf | LLM Metrics                                         
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃                            Statistic ┃       avg ┃       min ┃       max ┃       p99 ┃       p90 ┃       p75 ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│                 Request Latency (ms) │ 37,719.87 │ 11,690.65 │ 58,601.16 │ 58,194.75 │ 50,017.27 │ 45,109.17 │
+│      Output Sequence Length (tokens) │    460.20 │     97.00 │    718.00 │    715.53 │    683.40 │    588.00 │
+│       Input Sequence Length (tokens) │    550.00 │    550.00 │    550.00 │    550.00 │    550.00 │    550.00 │
+│ Output Token Throughput (tokens/sec) │     91.19 │       N/A │       N/A │       N/A │       N/A │       N/A │
+│         Request Throughput (per sec) │      0.20 │       N/A │       N/A │       N/A │       N/A │       N/A │
+│                Request Count (count) │     20.00 │       N/A │       N/A │       N/A │       N/A │       N/A │
+└──────────────────────────────────────┴───────────┴───────────┴───────────┴───────────┴───────────┴───────────┘
+[2026-04-17 09:57:38] INFO     Generating artifacts/Qwen_Qwen2.5-72B-Instruct-openai-chat-concurrency10/profile_export_genai_perf.json   json_exporter.py:64
+[2026-04-17 09:57:38] INFO     Generating artifacts/Qwen_Qwen2.5-72B-Instruct-openai-chat-concurrency10/profile_export_genai_perf.csv     csv_exporter.py:75
+```
+
 실행을 완료하면 port-foward 프로세스를 죽인다.
 ```
 kill %1
