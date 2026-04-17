@@ -75,7 +75,7 @@ concurrency 100 → num-prompts 200
 ```
 
 
-## 포트포워딩 삭제 ##
+## 포트 포워딩 삭제 ##
 실행을 완료하면 port-foward 프로세스를 죽인다.
 ```
 kill %1
