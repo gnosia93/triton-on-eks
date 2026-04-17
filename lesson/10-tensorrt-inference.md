@@ -33,7 +33,7 @@ kubectl annotate serviceaccount s3-access-sa -n default \
 ### 모델 최적화 하기 ###
 
 TensorRT-LLM을 이용하여 HuggingFace 모델을 NVIDIA GPU에 맞게 최적화한다.  
-* 체크포인트 변환: HuggingFace 가중치를 TensorRT-LLM 포맷으로 변환하고, TP(텐서 병렬) 분할 수행
+* 체크포인트 변환: HuggingFace 가중치를 TensorRT-LLM 포맷으로 변환하고, 설정에 따른 모델(TP/PP/EP) 분할 수행
 * 엔진 빌드: 모델 그래프를 GPU에서 실행 가능한 TensorRT 엔진으로 컴파일하며, 레이어 퓨전·커널 선택·메모리 레이아웃 최적화 적용
 
 >[!NOTE]
