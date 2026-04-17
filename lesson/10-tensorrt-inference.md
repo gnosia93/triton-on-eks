@@ -28,6 +28,10 @@ kubectl annotate serviceaccount s3-access-sa -n default \
 ```
 
 ### 모델 최적화 하기 ###
+
+> [!IMPORTANT]
+> 본 튜토리얼에서는 비용 절감을 위해 g6e.12xlarge(L40S × 4)를 사용하였으나, L40S는 GPU 간 통신이 PCIe로 연결되어 있어 Tensor Parallel 성능이 제한된다. 실제 운영 환경에서는 > NVLink가 지원되는 p4d.24xlarge(A100 × 8) 또는 p5.48xlarge(H100 × 8) 인스턴스를 권장한다. NVLink는 PCIe 대비 약 7배(A100: 600GB/s vs PCIe Gen4: 64GB/s) ~ 14배(H100: 900GB/s vs PCIe Gen5: 64GB/s) 높은 GPU 간 대역폭을 제공하여, 멀티 GPU 추론 시 통신 병목을 크게 줄여준다.
+
 TensorRT-LLM을 이용하여 HuggingFace 모델을 NVIDIA GPU에 맞게 최적화한다.  
 * 체크포인트 변환: HuggingFace 가중치를 TensorRT-LLM 포맷으로 변환하고, TP(텐서 병렬) 분할 수행
 * 엔진 빌드: 모델 그래프를 GPU에서 실행 가능한 TensorRT 엔진으로 컴파일하며, 레이어 퓨전·커널 선택·메모리 레이아웃 최적화 적용
