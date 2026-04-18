@@ -9,12 +9,6 @@ variable "cluster_name" {
   default     = "eks-agentic-ai"
 }
 
-variable "vectordb_bucket_name" {
-  type        = string
-  default     = "eks-agentic-ai"
-}
-
-
 variable "vpc_cidr_block" {
   description = "CIDR block for the main VPC"
   type        = string
