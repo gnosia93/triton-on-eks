@@ -64,7 +64,8 @@ port-forward로 빠르게 확인:
 ```
 kubectl port-forward svc/milvus -n milvus 19530:19530
 ```
-그 다음 로컬에서:
+
+파이썬 IDE 에서 아래 코드를 실행한다.
 ```
 from pymilvus import connections, Collection, FieldSchema, CollectionSchema, DataType
 
