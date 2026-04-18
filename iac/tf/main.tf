@@ -195,9 +195,10 @@ resource "aws_instance" "vscode" {
     volume_type = "gp3" # 최신 gp3 볼륨 타입 사용
   }
 
-  user_data_base64 = base64encode(templatefile("${path.module}/userdata.sh", {
-    vscode_password = var.vscode_password
-  }))
+  #user_data_base64 = base64encode(templatefile("${path.module}/userdata.sh", {
+  #  vscode_password = var.vscode_password
+  #}))
+  user_data_base64 = base64encode(file("${path.module}/userdata.sh"))
 
   tags = {
     Name = "eai-vscode"
