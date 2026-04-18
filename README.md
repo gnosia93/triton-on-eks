@@ -15,7 +15,7 @@ _This workshopo is under construction, Not fully implemented yet_
    - [RAG 파이프 라인 개념](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-rag-pipeline-concept.md)
    - [벡터DB(Milvus) 설치](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-milvus-install.md)
    - [PDF 문서 저장하기 (레이아웃 파싱/청킹/임베딩)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-pdf-save.md)
-   - [LLM 통합하기 (검색/리랭킹/LLM 생성)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-llm-call.md)
+   - [LLM 통합하기 (검색/리랭킹/답변 생성)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/5-llm-call.md)
    - RAG MCP 서버 만들기
    - 빠른 검증 (sanity check)   ← 간단한 질문 몇 개로 동작 확인
          
