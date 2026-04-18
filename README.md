@@ -33,7 +33,7 @@ _This workshopo is under construction, Not fully implemented yet_
    - [에이전트 도구 호출 보안: SSRF 방지를 위한 네트워크 격리 (Egress 관리)](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/7-security-ssrf.md)
    - 권한 제어: LangGraph를 이용한 Human-in-the-loop(승인 절차) 구현
 
-* [L8. 평가 파이프라인 구성하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/8.eval-framework.md)
+* [L8. AI 시스템 평가 파이프라인](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/8.eval-framework.md)
    - RAG 검색 품질 평가
    - LLM 답변 품질 평가
    - 에이전트 행동 평가 (tool 선택, 실행 순서)
