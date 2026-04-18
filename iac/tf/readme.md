@@ -111,6 +111,7 @@ helm install gpu-operator nvidia/gpu-operator \
 # Pod 상태 확인
 kubectl get pods -n gpu-operator
 
+# 노드 정보 출력
 kubectl get nodes -o custom-columns=\
 NAME:.metadata.name,\
 TYPE:.metadata.labels.'node\.kubernetes\.io/instance-type',\
