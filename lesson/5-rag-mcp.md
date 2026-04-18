@@ -1,4 +1,4 @@
-### 1. [rag-mcp-server.py 내려받기](https://github.com/gnosia93/eks-agentic-ai/blob/main/code/rag/rag-mcp-server.py) ###
+### [1. rag-mcp-server.py 내려받기](https://github.com/gnosia93/eks-agentic-ai/blob/main/code/rag/rag-mcp-server.py) ###
 
 ```
 curl -o rag-mcp-server.py \
