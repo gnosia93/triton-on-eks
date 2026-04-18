@@ -76,17 +76,23 @@ fields = [
 ]
 schema = CollectionSchema(fields)
 collection = Collection("test_collection", schema)
+```
 
-# 데이터 입력
+#### 더미 백터(128차원) 생성 및 DB 입력 ####
+```
 import random
 vectors = [[random.random() for _ in range(128)] for _ in range(10)]
 collection.insert([vectors])
+```
 
-# 인덱스 생성 & 로드
+#### 인덱스 생성 & 로드 ####
+```
 collection.create_index("embedding", {"index_type": "HNSW", "metric_type": "L2", "params": {"M": 8, "efConstruction": 64}})
 collection.load()
+```
 
-# 검색
+#### 검색 ####
+```
 results = collection.search(
     data=[vectors[0]],
     anns_field="embedding",
