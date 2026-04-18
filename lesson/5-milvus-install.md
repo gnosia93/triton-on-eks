@@ -31,10 +31,15 @@ gp3 (default)   ebs.csi.aws.com         Delete          WaitForFirstConsumer   t
 ```
 #### 2. EBS CSI 드라이버 확인 ###
 ```
-
+kubectl get pods -n kube-system | grep ebs-csi
 ```
 [결과]
 ```
+ebs-csi-controller-85fd97c85b-glnbc   6/6     Running   0          19m
+ebs-csi-controller-85fd97c85b-v7h86   6/6     Running   0          19m
+ebs-csi-node-48h59                    3/3     Running   0          19m
+ebs-csi-node-c6fmt                    3/3     Running   0          19m
+ebs-csi-node-f46xd                    3/3     Running   0          3m26s
 ```
 
 #### 3. addon 확인 ###
