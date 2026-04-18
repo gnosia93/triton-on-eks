@@ -13,6 +13,8 @@ PDF 파일 → 레이아웃 파싱 → 청킹 → 임베딩(벡터화) → Milvu
 rag/
 ├── PDFVectorStore.py       ← curl로 받은 파일
 └── main.py                 ← 여기서 from PDFVectorStore import ...
+└── pdfs/
+    └── LoRA_Low-Rank_Adaptation.pdf
 ```
 
 ### 2. 환경 준비 ###
