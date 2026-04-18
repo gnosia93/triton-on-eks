@@ -5,13 +5,14 @@ export CLUSTER_NAME=eks-agentic-ai
 export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 export TOKEN=$(curl -sX PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 export AWS_REGION=$(curl -sH "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/placement/region)
-
-
-
-
 export VECTORDB_BUCKET_NAME=${CLUSTER_NAME}-vectordb-milvus-${ACCOUNT_ID}
 
-aws s3 mb s3://${VECTORDB_BUCKET_NAME} --region ap-northeast-2
+echo "CLUSTER_NAME: $CLUSTER_NAME"
+echo "ACCOUNT_ID: $ACCOUNT_ID"
+echo "AWS_REGION: $AWS_REGION"
+echo "VECTORDB_BUCKET_NAME: ${VECTORDB_BUCKET_NAME}"
+
+aws s3 mb s3://${VECTORDB_BUCKET_NAME} --region ${AWS_REGION}
 ```
 
 ### milvus 설치 ###
