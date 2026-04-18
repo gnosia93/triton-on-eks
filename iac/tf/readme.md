@@ -83,7 +83,7 @@ source ~/.bashrc
 kubectl get pods -n karpenter -l app.kubernetes.io/name=karpenter
 kubectl get crd | grep karpenter
 
-kubectl logs -n karpenter -l app.kubernetes.io/name=karpenter --tail=10
+kubectl logs -n karpenter -l app.kubernetes.io/name=karpenter --tail=5
 ```
 
 ### 메트릭 서버 설치 ###
