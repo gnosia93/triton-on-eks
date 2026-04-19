@@ -1,8 +1,8 @@
 
-## 아키텍처 ##
+## Agentic AI 아키텍처 ##
 ![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/agentic-arch.png)
 
-## Open WebUI 설치 ##
+### Open WebUI 설치 ###
 ```
 helm repo add open-webui https://helm.openwebui.com/
 helm repo update
@@ -55,7 +55,7 @@ EOF
 > grep -A1 -iE "openai|ollama|env" default-values.yaml  
 > 
 
-배포하기
+### 배포하기 ###
 ```
 helm install open-webui open-webui/open-webui \
   -n webui --create-namespace \
