@@ -171,3 +171,55 @@ async def stream_agent(messages, model: str) -> AsyncIterator[str]:
 async def health():
     return {"status": "ok"}
 ```
+
+실행:
+```
+pip install fastapi uvicorn langgraph langchain-aws
+uvicorn agent_gateway:app --host 0.0.0.0 --port 8000
+```
+
+----
+
+고려할 포인트
+
+1. 스트리밍이 중요
+Open WebUI는 스트리밍을 기대해요. 한 번에 답 주면 사용자가 몇 초씩 기다려야 함. LangGraph의 astream(stream_mode="messages") 꼭 쓰세요.
+
+2. Tool 호출 진행 표시
+고급 사용자 경험을 위해, Tool 실행 중 상태를 사용자에게 보여주면 좋아요:
+
+🔍 Milvus에서 검색 중...
+📊 재순위화 중...
+💭 답변 생성 중...
+Open WebUI가 "thinking" 블록을 지원하는데 <thinking>...</thinking> 태그나 o1 스타일 reasoning_content 포맷 쓰면 접어서 보여줘요.
+
+3. 세션/메모리 관리
+Open WebUI는 대화 이력을 messages 배열로 매번 다시 보내요. LangGraph의 Checkpointer(Memory)와 겹치면 이중 저장 돼서 혼란스러울 수 있어요.
+
+두 전략 중 선택:
+
+A. Open WebUI에만 맡기기: LangGraph는 매 요청 stateless, messages 그대로 사용
+B. LangGraph가 주도: conversation_id를 커스텀 헤더로 받아 Checkpointer 관리
+워크샵용이면 A가 간단.
+
+4. 에러 처리
+LangGraph에서 예외 나면 Open WebUI는 응답이 오기를 계속 기다려요. 에러도 OpenAI 포맷으로 반환:
+
+from fastapi import HTTPException
+
+try:
+    result = await agent.ainvoke({"messages": lc_messages})
+except Exception as e:
+    return {
+        "error": {
+            "message": str(e),
+            "type": "internal_error",
+            "code": 500,
+        }
+    }
+5. 인증 (프로덕션)
+"API Key: dummy"는 교육용. 프로덕션이면:
+
+API Key 검증 미들웨어
+ALB + Cognito
+mTLS (사내 Zero Trust 환경)
