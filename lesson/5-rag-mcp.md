@@ -2,20 +2,7 @@
 
 RAGSearch를 MCP 서버로 감싸 EKS에 Pod로 배포한다. 외부 에이전트는 MCP 클라이언트로 Tool을 호출해 논문 검색 및 답변 생성을 원격으로 사용할 수 있다.
 
-```
-외부 에이전트 (MCP Client)
-        │  HTTP/SSE
-        ▼
-┌─────────────── EKS ──────────────────────────────────────────
-│   rag-mcp Pod (FastMCP + SSE)                               │
-│        │                  │                                  │
-│        ▼                  ▼                                  │
-│   Milvus (ClusterIP)   Reranker(BAAI/bge-reranker-v2-m3)    │
-└───────────────────────────────────────────────────────────────
-        │
-        ▼ (VPC 외부)
-      AWS Bedrock
-```
+![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/rag-mcp-arch.png)
 
 ### [1. rag_mcp_server.py 내려받기](https://github.com/gnosia93/eks-agentic-ai/blob/main/code/rag/rag-mcp-server.py) ###
 
