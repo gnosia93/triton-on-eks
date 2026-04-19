@@ -63,7 +63,7 @@ _This workshopo is under construction, Not fully implemented yet_
 * [AI Engineering - Prompt/Context/Harness](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a5.harness-eng.md)
 * [promptfoo 로 모델 평가하기](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a7.promptfoo.md)
 * [TensorRT-LLM Speculative 디코딩](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/a8-speculative-decoding.md)
-     
+* [Neo4J 로 온톨로지(OnTology) 구현하기]      
 
 
 
