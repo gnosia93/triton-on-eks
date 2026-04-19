@@ -39,7 +39,7 @@ persistence:
   storageClass: gp3
 
 service:
-  type: ClusterIP   # Ingress로 노출 권장
+  type: LoadBalancer        # 외부 노출 
   port: 80
 
 resources:
