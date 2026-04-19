@@ -30,3 +30,7 @@ SSRF(Server-Side Request Forgery, 서버 측 요청 위조)는 공격자가 웹 
 
 ## TODO ##
 * Karpenter와 연계된 Pod 보안 정책(Network Policy)을 통해 에이전트가 허용되지 않은 내부망(Intranet)에 접근하지 못하도록 하는 실습을 강화
+
+- IMDS 차단 (Terraform 설정)
+- NetworkPolicy로 기본 egress 제어
+- Tool 함수에 safe_fetch 구현
