@@ -1,18 +1,6 @@
 
 ## 아키텍처 ##
-```
-사용자
-  ↓ HTTP
-Open WebUI (프론트엔드)
-  ↓ OpenAI-compatible API (/v1/chat/completions)
-FastAPI (OpenAI API 호환 레이어)
-  ↓ invoke()
-LangGraph Agent (워크플로우)
-  ├─ Tool: RAGSearch (Milvus)
-  ├─ Tool: web_fetch
-  ├─ Tool: ...
-  └─ Bedrock (LLM)
-```
+![](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/images/agentic-arch.png)
 
 ## Open WebUI 설치 ##
 ```
