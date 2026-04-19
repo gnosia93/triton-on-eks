@@ -197,6 +197,45 @@ https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/r
 
 python test_search.py
 ```
+[결과]
+```
+Handling connection for 19530
+I0419 03:59:26.106296   53106 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+I0419 03:59:26.139304   53106 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+I0419 03:59:26.173574   53106 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+I0419 03:59:26.204646   53106 fork_posix.cc:71] Other threads are currently calling into gRPC, skipping fork() handlers
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████| 391/391 [00:00<00:00, 54019.33it/s]
+
+질의: What is LoRA?
+======================================================================
+
+1. [02_LoRA_Low-Rank_Adaptation p.0] score=0.533
+   LORA: LOW-RANK ADAPTATION OF LARGE LAN-
+GUAGE MODELS
+Edward Hu∗
+Yelong Shen∗
+Phillip Wallis
+Zeyuan Allen-Zhu
+Yuanzhi Li
+Shean Wang
+Lu Wang
+Weizhu Chen
+Microsoft Corporation
+{edwardhu, yeshe, phwallis,...
+
+2. [02_LoRA_Low-Rank_Adaptation p.4] score=0.506
+   on the ﬂy on machines that store the pre-trained weights in VRAM. We also observe a 25% speedup
+during training on GPT-3 175B compared to full ﬁne-tuning5 as we do not need to calculate the
+gradient f...
+
+3. [02_LoRA_Low-Rank_Adaptation p.0] score=0.501
+   layer of the Transformer architecture, greatly reducing the number of trainable pa-
+rameters for downstream tasks. Compared to GPT-3 175B ﬁne-tuned with Adam,
+LoRA can reduce the number of trainable p...
+
+...
+```
 
 포트 포워딩을 종료한다. 
 ```
