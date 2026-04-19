@@ -19,7 +19,7 @@ variable "gpu_type" {
   description = "EC2 Instance Type (x86) - used for bastion host"
   type        = string
 #  default     = "g7e.4xlarge"
-  default     = "c8i.4xlarge"
+  default     = "c7i.4xlarge"
 }
 
 variable "system_node_instance_types" {
