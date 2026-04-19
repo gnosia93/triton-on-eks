@@ -64,7 +64,7 @@ def main():
     parser.add_argument("--region", default="ap-northeast-2", help="AWS 리전")
     parser.add_argument(
         "--model",
-        default="anthropic.claude-3-5-sonnet-20241022-v2:0",
+        default="apac.anthropic.claude-3-5-sonnet-20241022-v2:0",
         help="Bedrock 모델 ID",
     )
     parser.add_argument("--top-k", type=int, default=20, help="검색 후보 수")
@@ -105,7 +105,19 @@ AWS 콘솔에서 사용할 모델의 액세스를 먼저 열어줘야 한다.
 AWS 콘솔 → Bedrock → Model access → 사용할 모델 "Request access"
 ```
 
-#### 5.2 질의 실행 ####
+#### 5.2 호출 가능한 Bedrock 모델 확인 ####
+```
+aws bedrock list-inference-profiles \
+  --region ap-northeast-2 \
+  --query 'inferenceProfileSummaries[?contains(inferenceProfileName, `Claude 3.5 Sonnet v2`)].[inferenceProfileId]' \
+  --output text
+```
+[결과]
+```
+apac.anthropic.claude-3-5-sonnet-20241022-v2:0
+```
+
+#### 5.3 질의 실행 ####
 Milvus가 EKS 내부(ClusterIP)에 있으므로 앞 단계와 동일하게 kubectl port-forward로 터널을 연 뒤 질의를 실행한다.
 ```
 kubectl port-forward -n milvus svc/milvus 19530:19530 &
