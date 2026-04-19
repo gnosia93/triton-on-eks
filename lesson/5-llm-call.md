@@ -30,7 +30,7 @@ pip install boto3
 ```
 
 > [!NOTE]
-> aiobotocore 2.25.0 requires botocore<1.40.50,>=1.40.46 와 관련된 의존성 에러가 발생하나,   
+> aiobotocore 2.25.0 requires botocore<1.40.50,>=1.40.46 와 관련된 의존성 오류가 발생하나,   
 > 아래 bedrock-runtime 이 정상적으로 호출되는 경우 무시한다.  
 > 파이썬에서 pip 경고 ≠ 실제 오류, 경고는 "이 버전 조합이 테스트 안 됐음" 을 의미한다.
 > ```
