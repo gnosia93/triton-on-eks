@@ -92,4 +92,5 @@ driver.close()
 
 ```
 python test.py
+kill $PF_PID
 ```
