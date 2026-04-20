@@ -9,8 +9,8 @@ _This workshopo is under construction, Not fully implemented yet_
      
 * [L3. LLM 평가하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/3-llm-eval.md)
    - lm-eval-harness 벤치마크 기반 정량 평가
-   - perlexity
-   - 
+   - PPL(Perplexity) 도메인 밴치마크 
+   - LLM as a Judge
 
 * [L4. 파인튜닝하기 (인스트럭션 튜닝)](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/4-finetune.md)
 
