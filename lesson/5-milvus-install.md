@@ -19,26 +19,7 @@ echo "MILVUS_ROLE_ARN: ${MILVUS_ROLE_ARN}"
 aws s3 ls | grep ${VECTORDB_BUCKET_NAME}
 ```
 
-### 2. EKS nodegroup 추가 ###
-Agentic AI 관련 워크로드를 별도로 관리하기 위해 `ng-x86-cpu` 노드그룹을 생성한다. 참고로 EKS 클러스터의 기본 노드그룹은 Graviton 기반 c7g.xlarge 2대로 구성되어 있어, x86 전용 이미지나 ML 라이브러리 호환성이 필요한 Agent 워크로드를 분리해 운영한다.
-```
-eksctl create nodegroup \
-  --cluster=${CLUSTER_NAME} \
-  --region=${AWS_REGION} \
-  --name=ng-x86-cpu \
-  --node-type=c8i.4xlarge \
-  --nodes=2 \
-  --nodes-min=2 \
-  --nodes-max=4 \
-  --node-volume-size=300 \
-  --node-volume-type=gp3 \
-  --node-labels="workload=agent" \
-  --node-taints="dedicated=agent:NoSchedule" \
-  --node-private-networking \
-  --managed
-```
-
-### 3. milvus 설치 ###
+### 2. milvus 설치 ###
 eks 클러스터에 milvus 를 설치한다.
 ```bash
 helm repo add milvus https://zilliztech.github.io/milvus-helm/
@@ -66,18 +47,7 @@ helm upgrade --install milvus milvus/milvus \
   --set externalS3.useSSL=true \
   --set serviceAccount.create=true \
   --set serviceAccount.name=milvus-sa \
-  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${MILVUS_ROLE_ARN} \
-  \
-  --set standalone.nodeSelector.workload=agent \
-  --set standalone.tolerations[0].key=dedicated \
-  --set standalone.tolerations[0].operator=Equal \
-  --set standalone.tolerations[0].value=agent \
-  --set standalone.tolerations[0].effect=NoSchedule \
-  --set etcd.nodeSelector.workload=agent \
-  --set etcd.tolerations[0].key=dedicated \
-  --set etcd.tolerations[0].operator=Equal \
-  --set etcd.tolerations[0].value=agent \
-  --set etcd.tolerations[0].effect=NoSchedule
+  --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"=${MILVUS_ROLE_ARN}
 ```
 
 > [!TIP]
@@ -97,7 +67,7 @@ helm upgrade --install milvus milvus/milvus \
 > helm uninstall milvus -n milvus
 > ```
 
-### 4. milvus 설치 확인 ###
+### 3. milvus 설치 확인 ###
 ```bash
 kubectl get pods -n milvus
 ```
