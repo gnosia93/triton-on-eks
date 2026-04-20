@@ -25,10 +25,9 @@ kubectl create secret generic hf-token \
 
 ### 2. Deployment 다운로드 ###
 ```
-curl -o \
-
+curl -o vllm-eval.yaml \
+https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/eval/vllm-eval.yaml
 ```
-
 
 ### 3. 모델 테스트 ###
 ```
@@ -46,7 +45,8 @@ for MODEL in "${MODELS[@]}"; do
   echo "=== $MODEL ==="
 
   # 1. vLLM 기동
-  envsubst < vllm-l40s.yaml | kubectl apply -f -
+  envsubst < vllm-eval.yaml > vllm-eval-${MODEL}.yaml
+  kubectl apply -f vllm-eval-${MODEL}.yaml
 
   # 2. Ready 될 때까지 대기
   kubectl -n llm-eval rollout status deploy/vllm-current --timeout=600s
@@ -61,7 +61,7 @@ for MODEL in "${MODELS[@]}"; do
   python /scripts/domain_eval.py --model $NAME
 
   # 5. vLLM 내림
-  kubectl -n llm-eval delete deploy vllm-current
+  kubectl delete -f vllm-eval-${MODEL}.yaml
 done
 ```
 
