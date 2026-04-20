@@ -1,3 +1,44 @@
+### [g7e.4xlarge](https://aws.amazon.com/ko/ec2/instance-types/g7e/) 인스턴스 생성 ##
+```
+aws ec2 run-instances \
+  --image-id ami-xxxxxxxxxxxxxxxxx \
+  --instance-type g7e.4xlarge \
+  --key-name my-keypair \
+  --subnet-id subnet-xxxxxxxxxxxxxxxxx \
+  --security-group-ids sg-xxxxxxxxxxxxxxxxx \
+  --associate-public-ip-address \
+  --count 1 \
+  --region us-east-1 \
+  --block-device-mappings '[
+    {
+      "DeviceName": "/dev/sda1",
+      "Ebs": {
+        "VolumeSize": 300,
+        "VolumeType": "gp3",
+        "Iops": 3000,
+        "Throughput": 125,
+        "DeleteOnTermination": true,
+        "Encrypted": true
+      }
+    }
+  ]' 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 vscode 서버에는 이미 Jupyter, pytorch 등의 ML 개발 환경이 모두 설정되어져 있다. 
 
