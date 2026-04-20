@@ -165,7 +165,7 @@ done
 echo "=== all evaluations complete ==="
 ```
 
-### 결과 확인 ###
+### 4. 결과 확인 ###
 `결과 테이블로 출력`:
 ```
 python -m lm_eval.utils.zeno_visualize --data_path results/
