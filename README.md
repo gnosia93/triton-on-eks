@@ -91,7 +91,7 @@ _drawn by Nano Banana 2.0 with a rough prompt, Not perfect but it's amazong !_
 ## 레퍼런스 ##
 
 * [Alternatives to Attention Mechanism](https://www.youtube.com/watch?v=cKSwj_qZ8Jg&list=PLoROMvodv4rPgrvmYbBrxZCK_GwXvDVL3)
-
+* [System Design Course – APIs, Databases, Caching, CDNs, Load Balancing & Production Infra](https://www.youtube.com/watch?v=C842vFY5kRo)
 
 
 
