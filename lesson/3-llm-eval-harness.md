@@ -117,6 +117,10 @@ run_eval() {
   fi
 
   # 3. lm-eval-harness 실행
+  kubectl -n llm-eval port-forward svc/vllm-eval 8000:8000 &
+  PF_PID=$!
+  sleep 3
+
   lm_eval \
     --model local-chat-completions \
     --model_args "model=${model},base_url=http://vllm-eval.llm-eval:8000/v1/chat/completions" \
@@ -125,6 +129,9 @@ run_eval() {
 
   # 4. 도메인 평가
   python scripts/domain_eval.py --model "$name"
+
+  kill "$PF_PID" 2>/dev/null || true
+  wait "$PF_PID" 2>/dev/null || true
 
   # 5. vLLM 정리
   kubectl delete -f "$manifest" --ignore-not-found
@@ -144,8 +151,7 @@ echo "=== all evaluations complete ==="
 
 
 ```
-# Port-forward
-kubectl -n llm-eval port-forward svc/vllm-current 8000:8000
+
 
 # 다른 터미널
 curl http://localhost:8000/v1/chat/completions \
