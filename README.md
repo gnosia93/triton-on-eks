@@ -8,9 +8,10 @@ _This workshopo is under construction, Not fully implemented yet_
 * [L2. GPU 할당 및 주피터 노트북 설정](https://github.com/gnosia93/eks-agentic-ai/blob/main/lesson/2-pc-notebook.md)
      
 * [L3. LLM 평가하기](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/3-llm-eval.md)
-   - lm-eval-harness 벤치마크 기반 정량 평가
-   - PPL(Perplexity) 을 활용한 도메인 벤치마크 
-   - LLM as a Judge
+    - 일반 능력 평가 (lm-eval-harness) - MMLU, ARC, HellaSwag 등 표준 벤치마크
+    - 언어 모델링 능력 (Perplexity)
+    - 도메인 적합성 (커스텀 벤치마크)
+    - 응답 품질 (LLM-as-a-Judge)
 
 * [L4. 파인튜닝하기 (인스트럭션 튜닝)](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/4-finetune.md)
 
