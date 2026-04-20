@@ -109,7 +109,7 @@ if __name__ == "__main__":
 * Pairwise에서 답변 순서를 바꿔서 2번 평가하면 위치 편향(position bias)을 줄일 수 있음
 
 
-### 4. 사용 가능한 도구 ###
+### 4. 평가 도구 ###
 프로덕션에서는 사용자 요청과 LLM 응답을 로깅하고, 로그중 일부를 샘플링하여 비동기로 백그라운드에서 LLM Judge를 돌리고, 결과를 Prometheus 메트릭으로 수집하는 방식으로 운영.
 
 * Ragas: RAG 전용 메트릭(faithfulness, answer_relevancy, context_precision 등). Python.
