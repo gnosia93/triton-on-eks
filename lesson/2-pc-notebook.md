@@ -1,4 +1,17 @@
 ### [g7e.4xlarge](https://aws.amazon.com/ko/ec2/instance-types/g7e/) 인스턴스 생성 ##
+
+환경 변수를 설정한다. 
+```
+export CLUSTER_NAME=eks-agentic-ai
+export ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+export TOKEN=$(curl -sX PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+export AWS_REGION=$(curl -sH "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/placement/region)
+
+echo "CLUSTER_NAME: $CLUSTER_NAME"
+echo "ACCOUNT_ID: $ACCOUNT_ID"
+echo "AWS_REGION: $AWS_REGION"
+```
+
 ```
 aws ssm get-parameter \
   --name /aws/service/deeplearning/ami/x86_64/base-oss-nvidia-driver-gpu-ubuntu-22.04/latest/ami-id \
