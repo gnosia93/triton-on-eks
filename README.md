@@ -3,13 +3,13 @@ _This workshop is under construction, Not fully implemented yet_
 
 본 워크샵은 EKS(Amazon Elastic Kubernetes Service) 환경에서 고성능 GPU 리소스를 효율적으로 관리하며, 단순한 RAG를 넘어 스스로 판단하고 실행하는 Agentic AI를 프로덕션 수준으로 구현하는 것을 목표로 합니다. 오픈 소스 LLM 모델 선정 및 파인튜닝과 더불어, 기업용 서비스의 필수 요건인 보안 가드레일(Guardrails), 정량적 평가(Evaluation), 그리고 지속적 통합/배포(CI/CD) 파이프라인을 포함하고 있으며, 인프라 구축부터 서비스 안정화 및 모니터링까지 LLM 서비스의 전체 생애주기(end-to-end) 에 대해 학습합니다.
 
-<u>완료 후 할 수 있는 것</u>
+완료 후 할 수 있는 것  
 - EKS에 GPU 노드그룹 구성 및 Karpenter 오토스케일
 - LLM 파인튜닝과 정량 평가로 모델 품질 관리
 - RAG + Agentic 워크플로우를 프로덕션급으로 배포
 - 가드레일·관측성·LLMOps 파이프라인 구축
 
-**대상 독자**: EKS 운영 경험이 있고 LLM 서비스를 실전에 도입하려는 엔지니어
+대상 독자: EKS 운영 경험이 있고 LLM 서비스를 실전에 도입하려는 엔지니어
 
 * [L1. EKS 설치하기](https://github.com/gnosia93/eks-agentic-ai/tree/main/iac/tf)
 
