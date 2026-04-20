@@ -51,7 +51,21 @@ aws ec2 run-instances --image-id ${AMI_ID} \
         "Encrypted": true
       }
     }
-  ]' 
+  ]' \
+  --tag-specifications '[
+    {
+      "ResourceType": "instance",
+      "Tags": [
+        {"Key": "Name", "Value": "gpu-dev"}
+      ]
+    },
+    {
+      "ResourceType": "volume",
+      "Tags": [
+        {"Key": "Name", "Value": "gpu-dev"}
+      ]
+    }
+  ]'
 ```
 
 ### 2. PC 의 VS-CODE 로 접속하기 ###
