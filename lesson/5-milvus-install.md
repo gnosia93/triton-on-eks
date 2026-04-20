@@ -20,7 +20,7 @@ aws s3 ls | grep ${VECTORDB_BUCKET_NAME}
 ```
 
 ### 2. EKS nodegroup 추가 ###
-agentic AI 관련 워크로드를 별도로 관리하기 위해서 `ng-x86-cpu` 노드 그룹을 생성한다. 참고로 EKS 클러스터의 기본 노드그룹은 그라비톤 c7i.xlarge 2개로 구성되어 있다.
+agentic AI 관련 워크로드를 별도로 관리하기 위해서 `ng-x86-cpu` 노드 그룹을 생성한다. 참고로 EKS 클러스터의 기본 노드그룹은 그라비톤 c7i.xlarge 2대로 구성되어 있다.
 ```
 eksctl create nodegroup \
   --cluster=${CLUSTER_NAME} \
