@@ -102,9 +102,7 @@ PPL 값이 낮을수록 좋다.
 ```
 한마디로 PPL은 "모델이 이 도메인 텍스트를 얼마나 자연스럽게 느끼는가"의 수치화이고, 파인튜닝 효과를 정량적으로 검증하는 가장 기본적인 방법이다.
 
-#### PPL 측정 ####
-![](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/images/qwen-ppl.png)
-* https://github.com/gnosia93/agentic-ai-eks/blob/main/code/qwen_ppl.py 
+
 
 
 ## 레퍼런스 ##
