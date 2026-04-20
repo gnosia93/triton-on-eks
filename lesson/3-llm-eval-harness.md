@@ -3,14 +3,14 @@
 lm-evaluation-harness는 EleutherAI가 개발·공개한 대표적인 오픈소스 LLM 평가 프레임워크이다. MMLU, ARC, HellaSwag, TruthfulQA, GSM8K 등 수백 개의 벤치마크를 동일한 프롬프트 형식과 채점 규칙으로 돌려, 여러 모델의 성능을 공정하게 비교할 수 있다. HuggingFace 모델, vLLM 서버, OpenAI 호환 API 등 다양한 백엔드를 지원해 로컬 모델부터 상용 API까지 일관된 기준으로 평가할 수 있다는 점이 특징이다.
 
 ### 주요 벤치마크 ###
-* MMLU (Massive Multitask Language Understanding)
+#### MMLU (Massive Multitask Language Understanding) ####
 수학, 역사, 법학, 의학, 컴퓨터과학 등 57개 분야에 걸친 약 14,000개의 객관식 문제로 구성된 벤치마크로 중·고등학생 수준부터 전문가 수준까지 난이도가 다양해, 모델이 얼마나 폭넓은 지식과 전문 분야의 추론 능력을 갖췄는지 측정한다. LLM 성능을 논할 때 가장 먼저 언급되는 대표적인 지표이다.
 
 * 측정 영역: 지식 범위, 학문적 추론
 * 형식: 4지선다 객관식
 * 점수: Accuracy (%)
 
-* ARC (AI2 Reasoning Challenge)
+#### ARC (AI2 Reasoning Challenge) ####
 Allen Institute for AI가 만든 초·중학 과학 문제 벤치마크로, 쉬운 문제를 모은 ARC-Easy와 단순 암기로 못 푸는 ARC-Challenge 두 세트로 나뉜다. 특히 ARC-Challenge는 여러 단서를 조합해 추론해야 풀리는 문제들로 구성되어, 모델의 논리적 추론 능력을 평가하는 데 널리 쓰인다.
 
 * 측정 영역: 과학적 추론, 상식 기반 논리
