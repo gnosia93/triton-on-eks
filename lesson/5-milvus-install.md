@@ -19,21 +19,19 @@ echo "MILVUS_ROLE_ARN: ${MILVUS_ROLE_ARN}"
 aws s3 ls | grep ${VECTORDB_BUCKET_NAME}
 ```
 
-
 ### 2. EKS nodegroup 추가 ###
 ```
 eksctl create nodegroup \
-  --cluster=my-cluster \
-  --region=ap-northeast-2 \
-  --name=worker-ng \
-  --node-type=m5.large \
+  --cluster=${CLUSTER_NAME} \
+  --region=${AWS_REGION} \
+  --name=ng-x86-cpu \
+  --node-type=c8i.4xlarge \
   --nodes=2 \
-  --nodes-min=1 \
-  --nodes-max=5 \
-  --node-volume-size=50 \
+  --nodes-min=2 \
+  --nodes-max=2 \
+  --node-volume-size=100 \
   --node-volume-type=gp3 \
   --node-private-networking \
-  --node-labels="workload=general" \
   --managed
 ```
 
