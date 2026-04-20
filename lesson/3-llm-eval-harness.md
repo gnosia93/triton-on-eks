@@ -197,3 +197,7 @@ done
 아래 예제는 qwen 모델의 PPL 을 허깅페이스 API 로 측정하는 방법이다. 
 ![](https://github.com/gnosia93/agentic-ai-eks/blob/main/lesson/images/qwen-ppl.png)
 * https://github.com/gnosia93/agentic-ai-eks/blob/main/code/qwen_ppl.py 
+
+## 레퍼런스 ##
+
+* https://artificialanalysis.ai/leaderboards/models
