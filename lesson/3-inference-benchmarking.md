@@ -5,7 +5,7 @@
 실무에서 모델 고를 때 체크하는 것들:
 
 * 품질: MMLU, 도메인 벤치, LLM-as-Judge 점수
-* 속도: TTFT, TPOT, throughput
+* 속도: TTFT, TPOT(Time Per Output Token), ITL(Inter-Token Latency), Throughput
 * 메모리: VRAM 요구량, 최대 컨텍스트 길이
 * 라이선스: 상업 사용 가능 여부
 * 언어: 한국어 지원 수준
