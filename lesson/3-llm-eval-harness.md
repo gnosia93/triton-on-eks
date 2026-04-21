@@ -253,17 +253,16 @@ local-completions ({'model': 'Qwen/Qwen2.5-7B-Instruct', 'base_url': 'http://loc
 ### 4. 결과 확인 ###
 `결과 테이블로 출력`:
 ```
-python -m lm_eval.utils.zeno_visualize --data_path results/
-```
+cd ~/eval
 
-`또는 간단히 jq로`:
-```
 for f in results/*/*/results_*.json; do
-  model=$(jq -r '.model_name' "$f")
-  mmlu=$(jq -r '.results.mmlu."acc,none"' "$f")
-  arc=$(jq -r '.results.arc_challenge."acc_norm,none"' "$f")
-  hella=$(jq -r '.results.hellaswag."acc_norm,none"' "$f")
-  printf "%-40s mmlu=%.4f arc=%.4f hella=%.4f\n" "$model" "$mmlu" "$arc" "$hella"
+  model=$(jq -r '.model_name // .config.model_args // "unknown"' "$f")
+  wiki_ppl=$(jq -r '.results.wikitext."word_perplexity,none" // "N/A"' "$f")
+  byte_ppl=$(jq -r '.results.wikitext."byte_perplexity,none" // "N/A"' "$f")
+  lamb_acc=$(jq -r '.results.lambada_openai."acc,none" // "N/A"' "$f")
+  lamb_ppl=$(jq -r '.results.lambada_openai."perplexity,none" // "N/A"' "$f")
+  printf "%-50s wiki_ppl=%s  lambada_acc=%s  lambada_ppl=%s\n" \
+    "$model" "$wiki_ppl" "$lamb_acc" "$lamb_ppl"
 done
 ```
 
