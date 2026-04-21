@@ -12,17 +12,9 @@ export VPC_ID=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID \
   --query 'Reservations[0].Instances[0].VpcId' --output text)
 export AWS_REGION=$(curl -sH "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/placement/region)
 
-export AMI_ID=$(aws ssm get-parameter \
-  --name /aws/service/deeplearning/ami/x86_64/base-oss-nvidia-driver-gpu-ubuntu-22.04/latest/ami-id \
-  --region ${AWS_REGION} --query 'Parameter.Value' --output text)
-
 export AMID_ID=$(aws ec2 describe-images --owners amazon \
   --filters "Name=name,Values=Deep Learning OSS Nvidia Driver AMI GPU PyTorch*Ubuntu 22.04*" \
   --query 'sort_by(Images, &CreationDate)[-1].[ImageId]' --output text --region $AWS_REGION)
-
-echo $AMID_ID
-
-
 export SG_ID=$(aws ec2 describe-security-groups --filters \
   "Name=group-name,Values=eks-host-sg" "Name=vpc-id,Values=${VPC_ID}" \
   --query 'SecurityGroups[0].GroupId' --output text)
