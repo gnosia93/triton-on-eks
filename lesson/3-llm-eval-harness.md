@@ -96,7 +96,7 @@ https://raw.githubusercontent.com/gnosia93/eks-agentic-ai/refs/heads/main/code/e
 
 ### 3. 모델 테스트 (스크립트) ###
 ```
-cat << `EOF` > eval-all.sh
+cat << 'EOF' > eval-all.sh
 #!/bin/bash
 set -euo pipefail
 
