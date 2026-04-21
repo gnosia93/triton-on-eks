@@ -1,4 +1,4 @@
-L6. LangGraph로 Agentic AI 만들기
+## L6. LangGraph로 Agentic AI 만들기 ##
 
 6.1 왜 Agentic인가 (10분, 이론)
   - RAG의 한계: 단일 턴, 정적 흐름
