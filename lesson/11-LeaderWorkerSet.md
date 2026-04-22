@@ -151,7 +151,7 @@ spec:
 ```
 주목할 포인트는 Leader와 Worker의 command가 다르다는 점으로, Leader는 Ray 클러스터를 시작하고 vLLM 서버를 띄우고, Worker는 Leader가 띄운 Ray에 join만 한다. 이 비대칭 구조가 LWS가 필요한 이유 그 자체다.
 
-### Topology-aware 스케줄링 ###
+#### Topology-aware 스케줄링 ####
 ```
 spec:
   leaderWorkerTemplate:
@@ -163,7 +163,7 @@ spec:
 ```
 이 설정으로 같은 Group의 Pod들은 가능한 한 같은 AZ에, 이상적으로는 같은 rack이나 같은 EFA fabric에 배치된다. AWS UltraCluster 같은 고성능 네트워크 환경에서 특히 효과가 크다.
 
-### 롤링 업데이트 ###
+#### 롤링 업데이트 ####
 일반 Deployment의 롤링 업데이트는 "Pod 하나씩 교체"다. LWS는 "Group 하나씩 교체"다.
 
 ```
@@ -175,6 +175,17 @@ spec:
       maxSurge: 0
 ```
 Group 0이 완전히 새 버전으로 교체된 다음 Group 1로 넘어간다. Group 내 Pod들은 동시에 교체되므로 중간에 "절반만 새 버전인 Group" 같은 이상한 상태가 안 생긴다.
+
+#### 조회하기 ####
+```
+kubectl get lws vllm-llama-405b -n llm-serving
+# NAME              READY   AGE
+# vllm-llama-405b   1/1     5m
+
+kubectl get pods -n llm-serving -l leaderworkerset.sigs.k8s.io/name=vllm-llama-405b
+# vllm-llama-405b-0         1/1   Running   (leader)
+# vllm-llama-405b-0-1       1/1   Running   (worker)
+```
 
 
 ### 설치하기 ###
