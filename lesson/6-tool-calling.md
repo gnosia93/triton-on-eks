@@ -1,7 +1,17 @@
 ```
-# requirements: langgraph, langchain-aws, langchain-core, boto3
-# pip install langgraph langchain-aws langchain-core boto3
+cat << 'EOF' > requirements.txt
+langgraph==1.1.6
+langchain-aws==1.4.1
+langchain-core==1.2.26
+boto3==1.42.52
+EOF
 
+pip install -r requirements.txt
+```
+
+[simple_tool.py]
+```
+cat << 'EOF' > simple_tool.py
 from typing import Annotated, TypedDict
 from langchain_core.messages import BaseMessage, HumanMessage
 from langchain_core.tools import tool
@@ -65,4 +75,5 @@ if __name__ == "__main__":
     
     for msg in result["messages"]:
         msg.pretty_print()
+EOF
 ```
