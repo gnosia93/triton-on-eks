@@ -75,14 +75,15 @@ resource "aws_security_group_rule" "fsx_to_eks_1018_1023" {
 # FSx for Lustre File System
 # ---------------------------------------------------
 resource "aws_fsx_lustre_file_system" "llama_cache" {
-  storage_capacity                = "2400"           # FSx storage in GiB (PERSISTENT_2 min 1200, multiples of 1200)
+  storage_capacity                = 4800           # FSx storage in GiB (PERSISTENT_2 min 1200, multiples of 1200)
   subnet_ids                      = [aws_subnet.private[0].id]   # private subnet 첫 번째
   security_group_ids              = [aws_security_group.fsx_lustre.id]
   deployment_type                 = "PERSISTENT_2"
-  per_unit_storage_throughput     = "1000"
+  per_unit_storage_throughput     = 1000
   file_system_type_version        = "2.15"
   data_compression_type           = "LZ4"
   storage_type                    = "SSD"
+  efa_enabled                     = true
   automatic_backup_retention_days = 0
 
   tags = {
