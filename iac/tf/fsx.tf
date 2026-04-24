@@ -66,6 +66,10 @@ resource "aws_fsx_lustre_file_system" "llama_cache" {
   automatic_backup_retention_days = 0
 
   # EFA 켜면 metadata_configuration 필수
+  # 메타데이터가 뭔데
+  # Lustre 파일시스템에서 파일/디렉토리 정보 관리하는 부분 (MDS - Metadata Server). 
+  # 일반 FSx는 메타데이터 용량이 스토리지 용량에 자동 비례. 
+  # EFA 켠 고성능 버전은 메타데이터도 별도 프로비저닝 단위로 관리
   metadata_configuration {
     mode = "AUTOMATIC"   # 또는 USER_PROVISIONED
   }
