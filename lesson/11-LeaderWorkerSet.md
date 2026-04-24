@@ -72,6 +72,13 @@ NAME                                                DESIRED   CURRENT   READY   
 replicaset.apps/lws-controller-manager-567cc75d78   2         2         2       65s
 ```
 
+
+## EFA 확인 ##
+
+
+
+
+
 ## Llama 3.1 405B 배포하기 ##
 다음은 vLLM으로 Llama 3.1 405B를 2노드에 걸쳐 서빙하는 예제이다.
 
