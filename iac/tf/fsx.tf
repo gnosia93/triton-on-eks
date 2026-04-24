@@ -36,7 +36,7 @@ resource "aws_security_group_rule" "eks_to_fsx_988" {
   to_port                  = 988
   protocol                 = "tcp"
   security_group_id        = aws_security_group.fsx_lustre.id
-  source_security_group_id = data.aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
+  source_security_group_id = aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
   description              = "EKS nodes to FSx Lustre"
 }
 
@@ -46,7 +46,7 @@ resource "aws_security_group_rule" "eks_to_fsx_1018_1023" {
   to_port                  = 1023
   protocol                 = "tcp"
   security_group_id        = aws_security_group.fsx_lustre.id
-  source_security_group_id = data.aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
+  source_security_group_id = aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
   description              = "EKS nodes to FSx Lustre"
 }
 
@@ -56,7 +56,7 @@ resource "aws_security_group_rule" "fsx_to_eks_988" {
   from_port                = 988
   to_port                  = 988
   protocol                 = "tcp"
-  security_group_id        = data.aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
+  security_group_id        = aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
   source_security_group_id = aws_security_group.fsx_lustre.id
   description              = "FSx Lustre to EKS nodes"
 }
@@ -66,7 +66,7 @@ resource "aws_security_group_rule" "fsx_to_eks_1018_1023" {
   from_port                = 1018
   to_port                  = 1023
   protocol                 = "tcp"
-  security_group_id        = data.aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
+  security_group_id        = aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
   source_security_group_id = aws_security_group.fsx_lustre.id
   description              = "FSx Lustre to EKS nodes"
 }
