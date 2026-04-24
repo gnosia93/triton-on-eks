@@ -72,14 +72,22 @@ NAME                                                DESIRED   CURRENT   READY   
 replicaset.apps/lws-controller-manager-567cc75d78   2         2         2       65s
 ```
 
-
-
 ## Llama 3.1 405B 배포하기 ##
 다음은 vLLM으로 Llama 3.1 405B를 2노드에 걸쳐 서빙하는 예제이다.
+
+#### 배포 전 확인사항 ####
+* hf-token Secret 생성됨 (kubectl create secret generic hf-token --from-literal=token=hf_xxx)
+* llama-405b-cache PVC 준비됨 (최소 1TB, FSx Lustre 강력 추천)
+* p5.48xlarge 노드 2대 확보 (Capacity Block 또는 Reserved)
+* 두 노드 같은 placement group 소속
+* EFA device plugin 설치됨
+*  NVIDIA device plugin 설치됨
+
+llm-serving 네임스페이스를 먼저 생성한다.
 ```
 kubectl create ns llm-serving
 ```
-
+LeaderWorkerSet 을 생성한다.
 ```
 cat <<'EOF' | kubectl apply -f - 
 apiVersion: leaderworkerset.x-k8s.io/v1
