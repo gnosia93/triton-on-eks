@@ -213,17 +213,6 @@ EOF
 ```
 눈여겨 볼점은 리더와 워커의 `명령어셋이 다르다는 점`으로, 리더는 Ray 클러스터를 시작하고 vLLM 서버를 띄우고, 워커는 리더가 띄운 Ray에 조인만 한다.
 
-> [!TIP]
-> 파드 종료 흐름 / kubelet이 파드를 죽이려 할 때 일어나는 일:
->
-> 1. preStop 훅 실행 (있으면)
-> 2. SIGTERM 전송 → "정리하고 종료해"
-> 3. terminationGracePeriodSeconds 동안 대기
-> 4. 아직 살아있으면 SIGKILL → "강제 종료"
-> 기본값은 30초이나, 대부분의 실전 워크로드는 명시적으로 그 값을 늘려준다.
-> 
-
-
 ### 조회하기 ###
 ```
 
@@ -238,8 +227,51 @@ EOF
 
 ```
 
+
+
 ## 마치며 ##
 LWS는 "대형 LLM 분산 추론을 선언적으로 관리하고 싶다"라는 요구에서 출발해, 기존 StatefulSet + Service + Init Container 조합의 구성을 간결하게 바꿀 수 있다. 특히 vLLM 커뮤니티가 LWS를 표준 배포 방식으로 채택하고 있어서, 생태계 호환성 측면에서도 이점이 있다.
+
+
+## 파드 종료 흐름 ##
+
+> [!TIP]
+> 파드 종료 흐름 / kubelet이 파드를 죽이려 할 때 일어나는 일:
+>
+> 1. preStop 훅 실행 (있으면)
+> 2. SIGTERM 전송 → "정리하고 종료해"
+> 3. terminationGracePeriodSeconds 동안 대기
+> 4. 아직 살아있으면 SIGKILL → "강제 종료"
+> 기본값은 30초이나, 대부분의 실전 워크로드는 명시적으로 그 값을 늘려준다.
+> 
+
+
+### 함께 쓰면 좋은 preStop 훅 ###
+graceful shutdown 제대로 하려면 preStop 훅을 추가:
+```
+lifecycle:
+  preStop:
+    exec:
+      command:
+        - /bin/sh
+        - -c
+        - |
+          # 1. Readiness false로 만들어 LB에서 빠지게 함
+          # 2. 진행 중 요청 완료 대기
+          sleep 30
+          # 3. 그 다음에야 SIGTERM이 앱에 감
+```
+```
+흐름:
+
+t=0   : preStop 실행 시작 (sleep 30)
+t=0~30: LB가 이 파드를 endpoint에서 제거
+        새 요청 안 들어옴, 기존 요청만 처리 중
+t=30  : preStop 끝, SIGTERM 앱에 전달
+t=30~120: 앱이 graceful shutdown (진행 요청 완료, cleanup)
+t=120 : 아직 살아있으면 SIGKILL
+grace period 안에 preStop 시간도 포함됩니다. 즉 preStop이 30초면, 실제 앱이 쓸 수 있는 시간은 120 - 30 = 90초.
+```
 
 ## 레퍼런스 ##
 * [vllm lws](https://docs.vllm.ai/en/latest/deployment/frameworks/lws/)
