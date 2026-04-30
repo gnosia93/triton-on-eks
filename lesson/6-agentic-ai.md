@@ -135,7 +135,7 @@ python setup/preflight.py
 
 ```
 
-### [1. 주피터 설정] ###
+### [M1. LangGraph 기본기] ###
 
 ### [2. @tool 콜링](https://github.com/gnosia93/langgraph-agentic-ai/blob/main/lesson/6-tool-calling.md) ###
 
